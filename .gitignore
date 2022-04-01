@@ -31,6 +31,12 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+# User directories
+_*/
+private/
+src/Setup-x64
+src/Wix-test*
+
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
@@ -174,7 +180,7 @@ publish/
 *.azurePubxml
 # Note: Comment the next line if you want to checkin your web deploy settings,
 # but database connection strings (with potential passwords) will be unencrypted
-*.pubxml
+#*.pubxml
 *.publishproj
 
 # Microsoft Azure Web App publish settings. Comment the next line if you want to

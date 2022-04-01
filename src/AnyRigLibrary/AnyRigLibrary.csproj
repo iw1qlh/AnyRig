@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+	  <Authors>IW1QLH</Authors>
+	  <Company>IW1QLH</Company>
+	  <Product>AnyRig</Product>
+	  <Title>CAT interface for Any RIG</Title>
+	  <Description>This library contains a collection of methods to communicate with Rig CAT. The library AnyRigBase is based on OmniRig by VE3NEA</Description>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.255">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	  <PackageReference Include="HRDlibrary" Version="1.0.4-beta" />
+    <PackageReference Include="System.Text.Json" Version="6.0.2" />	  
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AnyRigBase\AnyRigBase.csproj" />
+  </ItemGroup>
+
+</Project>

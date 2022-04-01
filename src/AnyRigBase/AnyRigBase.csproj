@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    
+    <PackageReference Include="ini-parser-netstandard" Version="2.5.2" />
+	<PackageReference Include="System.IO.Ports" Version="6.0.0" />
+	  
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Rigs\FT-857.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Rigs\TS-590.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

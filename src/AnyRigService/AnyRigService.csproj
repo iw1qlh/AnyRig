@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+	<TargetFramework>net6.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-AnyRigService-3631B88A-BF5C-4A58-8DCD-AF854B1E1142</UserSecretsId>
+	<OutputType>exe</OutputType>
+	<PublishSingleFile Condition="'$(Configuration)' == 'Release'">true</PublishSingleFile>
+	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	<PlatformTarget>x64</PlatformTarget>	  
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Fleck" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+	<PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.0" />
+  </ItemGroup>
+	
+	<ItemGroup>
+		<ProjectReference Include="..\AnyRigBase\AnyRigBase.csproj" />
+		<ProjectReference Include="..\AnyRigLibrary\AnyRigLibrary.csproj" />
+	</ItemGroup>
+
+</Project>
