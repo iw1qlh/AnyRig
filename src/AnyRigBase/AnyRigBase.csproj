@@ -2,11 +2,22 @@
 
   <PropertyGroup>
 	<TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+	<Authors>IW1QLH</Authors>
+	<Company>IW1QLH</Company>
+	<Product>AnyRigBase</Product>
+	<Title>CAT interface for Any RIG</Title>
+	<Description>This library contains a base class to communicate with Rig CAT. It's based on OmniRig by VE3NEA. It's designed to be used in AnyRigLibrary</Description>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+
   </PropertyGroup>
 
   <ItemGroup>
-    
-    <PackageReference Include="ini-parser-netstandard" Version="2.5.2" />
+	  <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.255">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+
+	  <PackageReference Include="ini-parser-netstandard" Version="2.5.2" />
 	<PackageReference Include="System.IO.Ports" Version="6.0.0" />
 	  
   </ItemGroup>

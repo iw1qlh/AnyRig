@@ -17,6 +17,9 @@ Through the library it's possible to read/write these RIG parameters:
 - VFO mode (VFOAA, VFOAB, VFOBA, VFOBB, VFOA, VFOB)
 
 ## AnyRigBase
+
+[![NuGet](https://img.shields.io/nuget/v/AnyRigBase.svg?style=flat-square)](https://www.nuget.org/packages/AnyRigBase)
+
 The class library AnyRigBase derives from OmniRig (http://www.dxatlas.com/OmniRig/), the great work of Alex VE3NEA.
 The INI files written for OmniRig are compatible with this library.
 
@@ -95,3 +98,9 @@ Any .NET application can uses one or other library changing a single line of cod
 ## Credits
 
 The AnyRigBase library derives from OmniRig. AnyRig and OmniRig are distrubuited under MPL license. Please mention license and both libraries in your project.
+
+## Architecture
+![Architecture](docs/AnyRigArchitecture.jpg)
+
+## Screenshot
+![Screen](docs/screen.jpg)
