@@ -113,9 +113,11 @@ namespace AnyRigConfig.GuiExtensions
                 if (Source == null)
                     return;
 
+                int scrollHeight = Math.Min(Source.Count, 18);
+
                 this.X = Pos.Center();
                 this.Y = Pos.Center();
-                Height = Source.Count + 4;
+                Height = scrollHeight + 4;
                 Title = title;
 
                 parent = Parent;
@@ -133,7 +135,16 @@ namespace AnyRigConfig.GuiExtensions
                     if (Parent.Text == value)
                         selected = i;
                 }
-                Width = max + 5;
+                Width = max + 6;
+
+                var scrollView = new ScrollView(new Rect(0, 0, max + 4, scrollHeight))
+                {
+                    //ColorScheme = Colors.TopLevel,
+                    ContentSize = new Size(max, Source.Count),
+                    //ContentOffset = new Point (0, 0),
+                    ShowVerticalScrollIndicator = true,
+                    //ShowHorizontalScrollIndicator = true,
+                };
 
                 source = Source;                
                 //listView = new ListView(Source)
@@ -147,7 +158,9 @@ namespace AnyRigConfig.GuiExtensions
                 };
                 if (selected != -1)
                     listView.SelectedItem = selected;
-                this.Add(listView);
+
+                scrollView.Add(listView);
+                this.Add(scrollView);
 
                 Button btnClose = new Button("Close")
                 {

@@ -73,7 +73,7 @@ namespace AnyRigConfig
 					new MenuItem ("_IW1QLH", "", () => { IW1QLH_Clicked(); }),
                     new MenuItem ("_Original Omni-Rig", "", () => { Afreet_Clicked(); }),
                     null,
-                    new MenuItem ("HRDLOG.net", "", () => { HrdlogNet_Clicked(); }),
+                    new MenuItem ("Ham365.net", "", () => { HrdlogNet_Clicked(); }),
                     null,
                     new MenuItem ("_Donate", "", () => { Donate_Clicked(); }),
 				})
@@ -227,7 +227,7 @@ namespace AnyRigConfig
                 Height = Dim.Fill()
             };
 
-            hrdView.Add(new Label(1, 1, "HRDLOG.net user"));
+            hrdView.Add(new Label(1, 1, "Ham365 user"));
             tfHrdUser = new TextField(18, 1, 12, "");
             tfHrdUser.Text = config.HrdUser ?? "TEST";
             hrdView.Add(tfHrdUser);
@@ -241,13 +241,13 @@ namespace AnyRigConfig
             cbViewCode.Toggled += (previousChecked) => OnViewCodeToggled(previousChecked);
             hrdView.Add(cbViewCode);
 
-            hrdView.Add(new Label(new Rect(1, 8, 74, 2), "You can publish your realtime ON-AIR status on HRDLOG.net/Ham365, on your own website or on your page on QRZ.com"));
+            hrdView.Add(new Label(new Rect(1, 8, 74, 2), "You can publish your realtime ON-AIR status on Ham365/HRDLOG.net, on your own website or on your page on QRZ.com"));
 
             btnSaveHrd = new Button(66, 2, "Save") { Width = 10 };
             btnSaveHrd.Clicked += () => { BtnSaveHrd_Clicked(); };
             hrdView.Add(btnSaveHrd);
 
-            var hrdTab = new TabView.Tab("HRDLOG.net ", hrdView);
+            var hrdTab = new TabView.Tab("Ham365.net ", hrdView);
             tabView.AddTab(hrdTab, false);
 
 
