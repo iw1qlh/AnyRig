@@ -54,6 +54,7 @@ Data are exchanged using text messages similar to that of rigctld.
 | RIT | u RIT | get_func RIT | U RIT | set_level RIT | ON, OFF |
 | XIT | u XIT | get_func XIT | U XIT | set_level XIT | ON, OFF |
 | RIT offest | j | get_rit | J | set_rit | clear_rit: set RIT offset to 0 |
+| RIGS list | | get_rigs | | | Returns the rigs list |
 
 ### Multiple RIGs
 | Command | RIG affected |
@@ -64,6 +65,44 @@ Data are exchanged using text messages similar to that of rigctld.
 
 ## AnyRig.Netwrapper
 It's a .NET library that has the same interface of AnyRig Library but can be used by more .NET applications at the same time connected through AnyRig Service.
+
+## AnyRigLibrary and AnyRig.Netwrapper usage
+```C#
+using AnyRigLibrary;
+using AnyRigLibrary.Models;
+using AnyRigNetWrapper;
+
+    void Demo()
+    {
+        IRigCore rig = null;
+
+        if (useLibrary)
+        {
+            AnyRigConfig config = ConfigManager.Load();
+            RigCore[] rigs = ConfigManager.LoadRigs(config);
+
+            if (rigs.Length > 0)
+            {
+                rig = rigs[0];
+                rig.Start();
+            }
+        }
+        else if (useSocket)
+        {
+            rig = new SocketRigWrapper();
+        }
+        else if (useNetpipe)
+        {
+            rig = new NetpipeRigWrapper();
+        }
+
+        rig.NotifyChanges = (rx, changed) => OnChanges(rx, changed);
+
+        rig.Freq = 7100000;
+        
+    }        
+
+```
 
 ## TestCat
 A simple form application by which it's possible to test the base function of the library (using AnyRigLibrary or AnyRig.Netwrapper)
@@ -92,8 +131,10 @@ Any .NET application can uses one or other library changing a single line of cod
         bool? Xit { get; set; }
 
         void ClearRit();
+
+        List<RigBaseData> GetRigsList();
     }
-```        
+```
 
 ## Credits
 

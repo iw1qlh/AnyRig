@@ -57,12 +57,11 @@ namespace AnyRigLibrary
         {
             List<RigCore> result = new List<RigCore>();
 
-            int n = 0;
-            foreach (RigSettings rigConfig in config.Rigs)
+            for (int i = 0; i < config.Rigs.Length; i++)
             {
                 RigCore rig = new RigCore();
-                rig.SetSettings(rigConfig, n++);
-                rig.SetHrdlogCredentials(new HrdlogCredentials { Callsign = config.HrdUser, UploadCode = config.UploadCode });
+                rig.SetSettings(i, config);
+                //rig.SetHrdlogCredentials(new HrdlogCredentials { Callsign = config.HrdUser, UploadCode = config.UploadCode });
                 result.Add(rig);
 
                 /*

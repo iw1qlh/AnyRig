@@ -217,6 +217,23 @@ namespace AnyRigNetWrapper
             sendCommand(RigCoreCommands.CMD_CLEAR_RIT);
         }
 
+        public List<RigBaseData> GetRigsList()
+        {
+            List<RigBaseData> result = null;
+
+            try
+            {
+                string json = sendCommand(RigCoreCommands.CMD_GET_RIG_LIST);
+                int pos = json.IndexOf("=");
+                if (pos >= 0)
+                    result = JsonSerializer.Deserialize<List<RigBaseData>>(json.Substring(pos + 1));
+            }
+            catch { }
+
+            return result;
+
+        }
+
         public void SendCustomCommand(string Command)
         {
             wrapper.SendCommand(Command);
@@ -231,5 +248,6 @@ namespace AnyRigNetWrapper
             wrapper.Stop();
         }
 
+        
     }
 }

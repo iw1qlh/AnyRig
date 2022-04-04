@@ -16,9 +16,11 @@ namespace AnyRigLibrary
         private TRig FRig;
         public object Parent;
 
-        private RigSettings settings;
+        private int rigNumber = 0;
+        private AnyRigConfig config;
+        //private RigSettings settings;
         private DateTime onAirTime;
-        private HrdlogCredentials hrdlogCredentials;
+        //private HrdlogCredentials hrdlogCredentials;
         private HrdProtocol protocol;
 
         //------------------------------------------------------------------------------
@@ -45,7 +47,7 @@ namespace AnyRigLibrary
 
         public Action<int, RigParam[]> NotifyChanges { get; set; }
 
-        public RigSettings Settings { get => settings; }
+        public RigSettings Settings { get => config.Rigs[rigNumber]; }
 
         public string RigType => Get_RigType();
 
@@ -74,9 +76,13 @@ namespace AnyRigLibrary
         //                              system
         //------------------------------------------------------------------------------
 
-        public void SetSettings(RigSettings Settings, int rigNumber)
+        public void SetSettings(int rigNumber, AnyRigConfig config)
         {
-            this.settings = Settings;
+
+            this.rigNumber = rigNumber;
+            this.config = config;
+
+            config.Rigs[rigNumber].RunningRig = this;
 
             FRig.Stop();
             try
@@ -92,6 +98,12 @@ namespace AnyRigLibrary
                 FRig.PollMs = Settings.PollMs;
                 FRig.TimeoutMs = Settings.TimeoutMs;
                 FRig.RigNumber = rigNumber;
+
+                if (!string.IsNullOrEmpty(config.HrdUser) && (config.UploadCode.Length == 10))
+                    protocol = new HrdProtocol(config.HrdUser, config.UploadCode, "AnyRigLibrary");
+                else
+                    protocol = null;
+
             }
             finally
             {
@@ -100,6 +112,7 @@ namespace AnyRigLibrary
 
         }
 
+        /*
         public void SetHrdlogCredentials(HrdlogCredentials credentials)
         {
             this.hrdlogCredentials = credentials;
@@ -108,6 +121,7 @@ namespace AnyRigLibrary
             else
                 protocol = null;
         }
+        */
 
         public string Get_RigType()
         {
@@ -338,6 +352,24 @@ namespace AnyRigLibrary
         public void ClearRit()
         {
             FRig.AddWriteCommand(TRigParam.pmRit0);
+        }
+
+        public List<RigBaseData> GetRigsList()
+        {
+            List<RigBaseData> result = new List<RigBaseData>();
+
+            for (int i = 0; i < config.Rigs.Length; i++)
+            {
+                result.Add(new RigBaseData
+                {
+                    RigIndex = i,
+                    RigType = config.Rigs[i].RunningRig.RigType,
+                    IsOnLine = config.Rigs[i].RunningRig.Status == RigStatus.ST_ONLINE
+                });
+            }
+
+            return result;
+
         }
 
         public void SetSimplexMode(long Freq)
@@ -639,7 +671,7 @@ namespace AnyRigLibrary
 
         private void FRig_Tick()
         {
-            if ((settings != null) && settings.SendOnAir && (DateTime.Now > onAirTime) && (Freq > 0) && (hrdlogCredentials != null) && (protocol != null))
+            if ((Settings != null) && Settings.SendOnAir && (DateTime.Now > onAirTime) && (Freq > 0) && (protocol != null))
             {
                 onAirTime = DateTime.Now.AddSeconds(45);
                 Task.Run(async () =>
@@ -669,9 +701,6 @@ namespace AnyRigLibrary
         {
             FRig.Stop();
         }
-
-
-
 
         //TODO IPortBits
         /*

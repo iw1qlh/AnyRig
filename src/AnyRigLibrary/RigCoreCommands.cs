@@ -1,6 +1,7 @@
 ﻿using AnyRigLibrary.Helpers;
 using AnyRigLibrary.Models;
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
@@ -51,7 +52,7 @@ namespace AnyRigLibrary
         public const string CMD_FUNC_RIT = "RIT";
         public const string CMD_FUNC_XIT = "XIT";
 
-
+        public const string CMD_GET_RIG_LIST = "get_rigs";
 
         public const string CMD_FORCE_CHANGE = ".";
 
@@ -290,6 +291,23 @@ namespace AnyRigLibrary
                                 }
                                 break;
 
+                            case CMD_GET_RIG_LIST:
+                                List<RigBaseData> rigList = new List<RigBaseData>();
+                                for (int i = 0; i < rigs.Length; i++)
+                                {
+                                    rigList.Add(new RigBaseData
+                                    {
+                                        RigIndex = i,
+                                        RigType = rigs[i].RigType,
+                                        IsOnLine = rigs[i].Status == RigStatus.ST_ONLINE
+                                    });
+                                }
+                                JsonSerializerOptions options = new JsonSerializerOptions()
+                                {
+                                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                                };
+                                result = JsonSerializer.Serialize<List<RigBaseData>>(rigList, options);
+                                break;
 
                             // simulate change
                             case CMD_FORCE_CHANGE:

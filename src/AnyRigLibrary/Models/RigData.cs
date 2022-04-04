@@ -1,10 +1,14 @@
 ﻿namespace AnyRigLibrary.Models
 {
-    public class RigData
+    public class RigBaseData
     {
         public int RigIndex { get; set; }
         public string RigType { get; set; }
         public bool IsOnLine { get; set; }
+    }
+
+    public class RigData : RigBaseData
+    {
         public long? Freq { get; set; }
         public long? FreqA { get; set; }
         public long? FreqB { get; set; }

@@ -54,6 +54,7 @@ namespace TestCat
             this.btnVfoB = new System.Windows.Forms.Button();
             this.btnClearRit = new System.Windows.Forms.Button();
             this.nudRit = new System.Windows.Forms.NumericUpDown();
+            this.lblRigs = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudRit)).BeginInit();
             this.SuspendLayout();
@@ -318,11 +319,21 @@ namespace TestCat
             this.nudRit.TabIndex = 18;
             this.nudRit.ValueChanged += new System.EventHandler(this.nudRit_ValueChanged);
             // 
+            // lblRigs
+            // 
+            this.lblRigs.AutoSize = true;
+            this.lblRigs.Location = new System.Drawing.Point(29, 388);
+            this.lblRigs.Name = "lblRigs";
+            this.lblRigs.Size = new System.Drawing.Size(38, 15);
+            this.lblRigs.TabIndex = 19;
+            this.lblRigs.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(443, 430);
+            this.Controls.Add(this.lblRigs);
             this.Controls.Add(this.nudRit);
             this.Controls.Add(this.btnClearRit);
             this.Controls.Add(this.btnVfoB);
@@ -379,5 +390,6 @@ namespace TestCat
         private Button btnVfoB;
         private Button btnClearRit;
         private NumericUpDown nudRit;
+        private Label lblRigs;
     }
 }

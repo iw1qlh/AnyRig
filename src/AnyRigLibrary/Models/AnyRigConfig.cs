@@ -11,5 +11,6 @@
         public string UploadCode { get; set; } = "0000000000";
         public string ConfigExePath { get; set; }
         public RigSettings[] Rigs { get; set; }
+        
     }
 }

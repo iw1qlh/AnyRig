@@ -1,4 +1,6 @@
-﻿namespace AnyRigLibrary.Models
+﻿using System.Text.Json.Serialization;
+
+namespace AnyRigLibrary.Models
 {
     public class RigSettings
     {
@@ -16,6 +18,9 @@
         public int TimeoutMs { get; set; } = 3000;
         public bool Enabled { get; set; }
         public bool SendOnAir { get; set; }
+
+        [JsonIgnore]
+        public RigCore RunningRig { get; set; }
 
         /*
         public void SetRig(TRig rig, int rigNumber)

@@ -1,5 +1,6 @@
 ﻿using AnyRigLibrary.Models;
 using System;
+using System.Collections.Generic;
 
 namespace AnyRigLibrary
 {
@@ -19,6 +20,7 @@ namespace AnyRigLibrary
         bool? Xit { get; set; }
 
         void ClearRit();
+        List<RigBaseData> GetRigsList();
 
         Action<int, RigParam[]> NotifyChanges { get; set; }
 

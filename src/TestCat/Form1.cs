@@ -87,6 +87,7 @@ namespace TestCat
             lblFreqB.Text = "0";
             LblMode.Text = "---";
             LblChanges.Text = "";
+            lblRigs.Text = "?";
 
             rig?.Stop();
 
@@ -119,6 +120,10 @@ namespace TestCat
             }
 
             rig.NotifyChanges = (rx, changed) => OnChanges(rx, changed);
+
+            var rigList = rig.GetRigsList();
+            if (rigList != null)
+                lblRigs.Text = string.Join(", ", rigList.Select(s => $"{s.RigType} {(s.IsOnLine ? "(on-line)" : "")}"));
 
             //OnChanges(0, new RigParam[0]);
 
