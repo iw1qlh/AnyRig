@@ -39,6 +39,53 @@ namespace AnyRigService
 
             logger.LogInformation("Starting PipeWorker");
 
+            _ = Task.Run(async () =>
+            {
+                while (!stoppingToken.IsCancellationRequested)
+                {
+                    try
+                    {
+                        NamedPipeServerStream server = new NamedPipeServerStream(RigCommon.PIPE_CHANGES_NAME, PipeDirection.Out, MAX_INSTANCES, PipeTransmissionMode.Message, PipeOptions.None, 1024, 1024);
+                        logger.LogInformation("PipeWorker: WaitForConnection (CHANGES)");
+                        await server.WaitForConnectionAsync(stoppingToken);
+                        rigsMachine.Start();
+                        clientList.Add(server);
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogError(ex, "PipeWorker (CHANGES task)");
+                    }
+                }
+            });
+
+            // Check broken pipes
+            _ = Task.Run(async () =>
+            {
+                while (!stoppingToken.IsCancellationRequested)
+                {
+                    foreach (var c in clientList)
+                    {
+                        if (c.IsConnected)
+                        {
+                            try
+                            {
+                                byte[] data = Encoding.UTF8.GetBytes("\r\n");
+                                c.Write(data, 0, data.Length);
+                            }
+                            catch
+                            {
+                                logger.LogInformation("Pipe is broken");
+                                c.Dispose();
+                            }
+                        }
+                    }
+
+                    await Task.Delay(1000);
+
+                }
+            });
+
+
             while (!stoppingToken.IsCancellationRequested)
             {
                 try
@@ -51,23 +98,11 @@ namespace AnyRigService
                     ps.AddAccessRule(par);
                     */
 
-
-                    _ = Task.Run(async () =>
-                    {
-                        while (!stoppingToken.IsCancellationRequested)
-                        {
-                            NamedPipeServerStream server = new NamedPipeServerStream(RigCommon.PIPE_CHANGES_NAME, PipeDirection.Out, MAX_INSTANCES, PipeTransmissionMode.Message, PipeOptions.None, 1024, 1024);
-                            logger.LogInformation("PipeWorker: WaitForConnection");
-                            await server.WaitForConnectionAsync(stoppingToken);
-                            rigsMachine.Start();
-                            clientList.Add(server);
-                        }
-                    });
-
-                    logger.LogInformation("PipeWorker: Starting command Pipe");
+                    //logger.LogInformation("PipeWorker: Starting command Pipe");
 
                     using (NamedPipeServerStream server = new NamedPipeServerStream(RigCommon.PIPE_COMMAND_NAME, PipeDirection.InOut, 1, PipeTransmissionMode.Message, PipeOptions.None, 1024, 1024))
                     {
+                        logger.LogInformation("PipeWorker: WaitForConnection (COMMAND)");
                         await server.WaitForConnectionAsync(stoppingToken);
                         using (StreamReader reader = new StreamReader(server))
                         {
@@ -98,12 +133,14 @@ namespace AnyRigService
                         
 
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, "PipeWorker");
+                    logger.LogError(ex, "PipeWorker (COMMAND task)");
                 }
+
+
             }
 
             Array.ForEach(rigs, r => r.Stop());
@@ -154,7 +191,10 @@ namespace AnyRigService
                         c.Write(data, 0, data.Length);
                         c.Flush();
                     }
-                    catch { }
+                    catch (Exception ex)
+                    {
+                        logger.LogWarning(ex, "PipeWorkers.OnChanges");
+                    }
                 }
             }
 

@@ -1,26 +1,4 @@
-﻿
-/* Unmerged change from project 'AnyRigBase (net6.0)'
-Before:
-using System;
-After:
-using AnyRigBase.Helpers;
-using System;
-*/
-using AnyRigBase.Helpers;
-
-/* Unmerged change from project 'AnyRigBase (net6.0)'
-Before:
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO.Ports;
-using AnyRigBase.Helpers;
-After:
-using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading;
-*/
+﻿using AnyRigBase.Helpers;
 using System;
 using System.IO.Ports;
 using System.Threading;
@@ -117,9 +95,6 @@ namespace AnyRigBase.Services
         public CommPort()
         {
             com = new SerialPort();
-            com.DataReceived += Com_DataReceived;
-            com.ErrorReceived += Com_ErrorReceived;
-            com.PinChanged += Com_PinChanged;
 
             //fill in DCB
             com.Handshake = Handshake.None;
@@ -158,6 +133,10 @@ namespace AnyRigBase.Services
 
         public void OpenPort()  //TODO private?
         {
+            com.DataReceived += Com_DataReceived;
+            com.ErrorReceived += Com_ErrorReceived;
+            com.PinChanged += Com_PinChanged;
+
             com.Open();
         }
 

@@ -32,7 +32,7 @@ namespace AnyRigBase
         public TRigCommands FRigCommands; //TODO protected
         private DateTime FNextStatusTime, FDeadLineTime;
 
-        private Task TimerTask;
+        //private Task TimerTask;
         private bool TaskCancelled;
 
         protected TCommandQueue FQueue;
@@ -180,16 +180,6 @@ namespace AnyRigBase
             PollMs = 500;
             TimeoutMs = 3000;
 
-            TaskCancelled = false;
-            TimerTask = Task.Run(async () =>
-            {
-                while (!TaskCancelled)
-                {
-                    TimerTick();
-                    await Task.Delay(200);  // in origine 100
-                }
-            });
-
         }
 
         ~TCustomRig()
@@ -287,6 +277,8 @@ namespace AnyRigBase
                 FQueue.Phase = TExchangePhase.phIdle;
                 FDeadLineTime = NEVER;
 
+                ClearRigStatus();
+
                 AddCommands(RigCommands.InitCmd, TCommandKind.ckInit);
 
                 AddCommands(RigCommands.StatusCmd, TCommandKind.ckStatus);
@@ -306,6 +298,17 @@ namespace AnyRigBase
                 CheckQueue();
             else
                 Log?.Invoke($"RIG%d {RigNumber} Unable to open port");
+
+            TaskCancelled = false;
+            _ = Task.Run(async () =>
+            {
+                while (!TaskCancelled)
+                {
+                    TimerTick();
+                    await Task.Delay(200);  // in origine 100
+                }
+            });
+
         }
 
         public void Stop()
