@@ -27,6 +27,7 @@ namespace AnyRigLibrary
         public const string CMD_GET_RIT_OFFSET = "j";
 
         public const string CMD_CLEAR_RIT = "clear_rit";
+        public const string CMD_DISABLE_ONAIR = "disable_onair";
 
         /*
                 public const string CMD_SET_XIT = "Z";
@@ -186,6 +187,10 @@ namespace AnyRigLibrary
 
                             case CMD_CLEAR_RIT:
                                 rig.ClearRit();
+                                break;
+
+                            case CMD_DISABLE_ONAIR:
+                                rig.DisableOnAir();
                                 break;
 
 /*

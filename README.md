@@ -54,6 +54,7 @@ Data are exchanged using text messages similar to that of rigctld.
 | RIT | u RIT | get_func RIT | U RIT | set_level RIT | ON, OFF |
 | XIT | u XIT | get_func XIT | U XIT | set_level XIT | ON, OFF |
 | RIT offest | j | get_rit | J | set_rit | clear_rit: set RIT offset to 0 |
+| Disable OnAir | | |  | disable_onair | Disable the ON-AIR status on Ham365/HRDLOG.net |
 | RIGS list | | get_rigs | | | Returns the rigs list |
 
 ### Multiple RIGs
@@ -89,11 +90,11 @@ using AnyRigNetWrapper;
         }
         else if (useSocket)
         {
-            rig = new SocketRigWrapper();
+            rig = new SocketRigWrapper(0);
         }
         else if (useNetpipe)
         {
-            rig = new NetpipeRigWrapper();
+            rig = new NetpipeRigWrapper(0);
         }
 
         rig.NotifyChanges = (rx, changed) => OnChanges(rx, changed);

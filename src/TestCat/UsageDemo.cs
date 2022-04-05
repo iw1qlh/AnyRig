@@ -30,11 +30,11 @@ internal class UsageDemo
         }
         else if (useSocket)
         {
-            rig = new SocketRigWrapper();
+            rig = new SocketRigWrapper(0);
         }
         else if (useNetpipe)
         {
-            rig = new NetpipeRigWrapper();
+            rig = new NetpipeRigWrapper(0);
         }
 
         rig.NotifyChanges = (rx, changed) => OnChanges(rx, changed);

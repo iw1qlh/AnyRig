@@ -21,6 +21,7 @@ namespace AnyRigLibrary
         //private RigSettings settings;
         private DateTime onAirTime;
         //private HrdlogCredentials hrdlogCredentials;
+        private bool onair;
         private HrdProtocol protocol;
 
         //------------------------------------------------------------------------------
@@ -70,7 +71,7 @@ namespace AnyRigLibrary
         public bool? Xit { get => Get_Xit(); set { Set_Xit(value.GetValueOrDefault()); } }
         public bool? Tx { get => Get_Tx(); set { Set_Tx(value.GetValueOrDefault()); } }
         public RigParam Mode { get => Get_Mode(); set { Set_Mode(value); } }
-
+        public bool OnAir { get => onair; }
 
         //------------------------------------------------------------------------------
         //                              system
@@ -99,17 +100,24 @@ namespace AnyRigLibrary
                 FRig.TimeoutMs = Settings.TimeoutMs;
                 FRig.RigNumber = rigNumber;
 
-                if (!string.IsNullOrEmpty(config.HrdUser) && (config.UploadCode.Length == 10))
+                protocol = null;
+                if (Settings.SendOnAir && !string.IsNullOrEmpty(config.HrdUser) && (config.UploadCode.Length == 10))
+                {
+                    onair = true;
                     protocol = new HrdProtocol(config.HrdUser, config.UploadCode, "AnyRigLibrary");
-                else
-                    protocol = null;
-
+                }
+                    
             }
             finally
             {
                 FRig.Enabled = true;
             }
 
+        }
+
+        public void DisableOnAir()
+        {
+            onair = false;
         }
 
         /*
@@ -671,9 +679,9 @@ namespace AnyRigLibrary
 
         private void FRig_Tick()
         {
-            if ((Settings != null) && Settings.SendOnAir && (DateTime.Now > onAirTime) && (Freq > 0) && (protocol != null))
+            if (onair && (DateTime.Now > onAirTime) && (Freq > 0) && (protocol != null))
             {
-                onAirTime = DateTime.Now.AddSeconds(45);
+                onAirTime = DateTime.Now.AddSeconds(75);    // expire after 90 seconds
                 Task.Run(async () =>
                 {
                     bool success = await protocol.SendOnAirAsync(Freq, Mode.ToString(), RigType);

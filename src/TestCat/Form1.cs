@@ -87,18 +87,21 @@ namespace TestCat
             lblFreqB.Text = "0";
             LblMode.Text = "---";
             LblChanges.Text = "";
-            lblRigs.Text = "?";
 
             rig?.Stop();
+
+            int nRig = cbRadio.SelectedIndex;
+            if (nRig < 0)
+                nRig = 0;
 
             if (rbLibrary.Checked)
             {
                 AnyRigConfig config = ConfigManager.Load();
                 RigCore[] rigs = ConfigManager.LoadRigs(config);
 
-                if (rigs.Length > 0)
+                if (rigs.Length > nRig)
                 {
-                    RigCore rigCore = rigs[0];
+                    RigCore rigCore = rigs[nRig];
 
                     rigCore.Log += (text) => Debug.WriteLine(text);
                     rigCore.InternalLog += (text) => Debug.WriteLine(text);
@@ -112,18 +115,24 @@ namespace TestCat
             }
             else if (rbSocket.Checked)
             {
-                rig = new SocketRigWrapper();
+                rig = new SocketRigWrapper(nRig);
             }
             else if (rbNetpipe.Checked)
             {
-                rig = new NetpipeRigWrapper();
+                rig = new NetpipeRigWrapper(nRig);
             }
 
             rig.NotifyChanges = (rx, changed) => OnChanges(rx, changed);
 
             var rigList = rig.GetRigsList();
             if (rigList != null)
-                lblRigs.Text = string.Join(", ", rigList.Select(s => $"{s.RigType} {(s.IsOnLine ? "(on-line)" : "")}"));
+            {                
+                cbRadio.SelectedIndexChanged -= rbMethod_Click;
+                cbRadio.Items.Clear();
+                cbRadio.Items.AddRange(rigList.Select(s => s.RigType).ToArray());
+                cbRadio.SelectedIndex = nRig;
+                cbRadio.SelectedIndexChanged += rbMethod_Click;
+            }
 
             //OnChanges(0, new RigParam[0]);
 

@@ -40,12 +40,16 @@ namespace AnyRigNetWrapper
         //                                 ctor
         //------------------------------------------------------------------------------
 
-        public BaseRigWrapper()
+        public BaseRigWrapper(int nRig)
         {
             wrapper = InitCommandWrapper();
             wrapper.Start();
             wrapper.OnChange = (json) => changeData(json);
-            RigIndex = 0;
+            RigIndex = nRig;
+        }
+
+        public BaseRigWrapper() : this(0)
+        {
         }
 
         //------------------------------------------------------------------------------
@@ -217,6 +221,11 @@ namespace AnyRigNetWrapper
             sendCommand(RigCoreCommands.CMD_CLEAR_RIT);
         }
 
+        public void DisableOnAir()
+        {
+            sendCommand(RigCoreCommands.CMD_DISABLE_ONAIR);
+        }
+
         public List<RigBaseData> GetRigsList()
         {
             List<RigBaseData> result = null;
@@ -247,7 +256,6 @@ namespace AnyRigNetWrapper
         {
             wrapper.Stop();
         }
-
         
     }
 }

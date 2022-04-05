@@ -20,6 +20,8 @@ namespace AnyRigLibrary
         bool? Xit { get; set; }
 
         void ClearRit();
+        void DisableOnAir();
+
         List<RigBaseData> GetRigsList();
 
         Action<int, RigParam[]> NotifyChanges { get; set; }
