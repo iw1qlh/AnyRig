@@ -15,7 +15,10 @@ namespace AnyRigBase.Helpers
 
         public static string GetRigsFolder()
         {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Rigs");
+            //return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Rigs");
+            string rigsFolder = Path.Combine(GetDataFolder(), "Rigs");
+            Directory.CreateDirectory(rigsFolder);
+            return rigsFolder;
         }
 
         public static string ConfigPath()

@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.ServiceProcess;
 using Terminal.Gui;
+using System.Diagnostics;
 
 namespace AnyRigConfig
 {
@@ -56,6 +57,8 @@ namespace AnyRigConfig
             Y = 1;
             top.Add(this);
 
+            CopyRigsFile();
+
             // MENU
 
             mnuRevert = new MenuItem("_Revert...", "", () => { Revert_Clicked(); });
@@ -69,7 +72,8 @@ namespace AnyRigConfig
 				}),
 				new MenuBarItem ("_Help", new MenuItem [] {
 					new MenuItem ("_About", "", () => { About_Clicked(); }),
-					null,
+                    new MenuItem ("Open _rigs folder", "", () => { RigsFolder_Clicked(); }),
+                    null,
 					new MenuItem ("_IW1QLH", "", () => { IW1QLH_Clicked(); }),
                     new MenuItem ("_Original Omni-Rig", "", () => { Afreet_Clicked(); }),
                     null,
@@ -304,6 +308,32 @@ namespace AnyRigConfig
             lvRigs.SelectedItem = 0;
             SetViews();            
 
+        }
+
+        private void CopyRigsFile()
+        {
+            try
+            {
+                string source = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Rigs");
+                string dest = PathHelpers.GetRigsFolder();
+                string[] files = Directory.GetFiles(source, "*.INI");
+                foreach (string fileName in files)
+                {
+                    string dst = Path.Combine(dest, Path.GetFileName(fileName));
+                    File.Copy(fileName, dst, overwrite: false);
+                }
+            }
+            catch { }
+        }
+
+        private void RigsFolder_Clicked()
+        {
+            string path = PathHelpers.GetRigsFolder();
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                Process.Start("explorer.exe", path);
+            else
+                MessageBox.Query("Open Rigs folder", path, "Ok");
         }
 
         private void BtnRestartService_Clicked()
