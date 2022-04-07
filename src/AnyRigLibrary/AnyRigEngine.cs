@@ -45,8 +45,14 @@ namespace AnyRigLibrary
 
         public void OpenSettings()
         {
-            string path = Path.Combine(config.ConfigExePath, "OmniRigConfig.exe");
-            Process.Start(path);
+            ProcessStartInfo pInfo = new ProcessStartInfo
+            {
+                UseShellExecute = true,
+                CreateNoWindow = false,
+                WindowStyle = ProcessWindowStyle.Normal,
+                FileName = Path.Combine(config.ConfigExePath, "AnyRigConfig.exe")
+            };
+            Process.Start(pInfo);
         }
 
     }

@@ -130,7 +130,6 @@ Any .NET application can uses one or other library changing a single line of cod
 
         void ClearRit();
 
-        List<RigBaseData> GetRigsList();
     }
 ```
 
