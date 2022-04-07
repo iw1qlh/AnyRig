@@ -19,8 +19,10 @@ namespace AnyRigLibrary.Models
         public bool Enabled { get; set; }
         public bool SendOnAir { get; set; }
 
+        /*
         [JsonIgnore]
         public RigCore RunningRig { get; set; }
+        */
 
         /*
         public void SetRig(TRig rig, int rigNumber)

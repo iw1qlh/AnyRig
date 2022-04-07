@@ -22,7 +22,7 @@ namespace AnyRigLibrary
         void ClearRit();
         void DisableOnAir();
 
-        List<RigBaseData> GetRigsList();
+        //List<RigBaseData> GetRigsList();
 
         Action<int, RigParam[]> NotifyChanges { get; set; }
 

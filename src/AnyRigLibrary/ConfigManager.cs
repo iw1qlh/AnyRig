@@ -59,8 +59,8 @@ namespace AnyRigLibrary
 
             for (int i = 0; i < config.Rigs.Length; i++)
             {
-                RigCore rig = new RigCore();
-                rig.SetSettings(i, config);
+                RigCore rig = new RigCore(i, config);
+                //rig.SetSettings(i, config);
                 //rig.SetHrdlogCredentials(new HrdlogCredentials { Callsign = config.HrdUser, UploadCode = config.UploadCode });
                 result.Add(rig);
 

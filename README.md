@@ -69,39 +69,36 @@ It's a .NET library that has the same interface of AnyRig Library but can be use
 
 ## AnyRigLibrary and AnyRig.Netwrapper usage
 ```C#
+using AnyRigNetWrapper;
 using AnyRigLibrary;
 using AnyRigLibrary.Models;
-using AnyRigNetWrapper;
 
     void Demo()
     {
+
+        IAnyRigEngine engine = null;
         IRigCore rig = null;
 
         if (useLibrary)
         {
-            AnyRigConfig config = ConfigManager.Load();
-            RigCore[] rigs = ConfigManager.LoadRigs(config);
-
-            if (rigs.Length > 0)
-            {
-                rig = rigs[0];
-                rig.Start();
-            }
+            engine = new AnyRigEngine();
         }
         else if (useSocket)
         {
-            rig = new SocketRigWrapper(0);
+            engine = new SocketRigEngine();
         }
         else if (useNetpipe)
         {
-            rig = new NetpipeRigWrapper(0);
+            engine = new NetpipeRigEngine();
         }
+
+        rig = engine.GetRig(0);
 
         rig.NotifyChanges = (rx, changed) => OnChanges(rx, changed);
 
         rig.Freq = 7100000;
-        
-    }        
+
+    }
 
 ```
 

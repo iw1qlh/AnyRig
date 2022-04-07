@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AnyRigNetWrapper;
 using AnyRigLibrary;
 using AnyRigLibrary.Models;
-using AnyRigNetWrapper;
 
 namespace TestCat;
 internal class UsageDemo
@@ -15,27 +15,23 @@ internal class UsageDemo
     void Demo()
     {
 
+        IAnyRigEngine engine = null;
         IRigCore rig = null;
 
         if (useLibrary)
         {
-            AnyRigConfig config = ConfigManager.Load();
-            RigCore[] rigs = ConfigManager.LoadRigs(config);
-
-            if (rigs.Length > 0)
-            {
-                rig = rigs[0];
-                rig.Start();
-            }
+            engine = new AnyRigEngine();
         }
         else if (useSocket)
         {
-            rig = new SocketRigWrapper(0);
+            engine = new SocketRigEngine();
         }
         else if (useNetpipe)
         {
-            rig = new NetpipeRigWrapper(0);
+            engine = new NetpipeRigEngine();
         }
+
+        rig = engine.GetRig(0);
 
         rig.NotifyChanges = (rx, changed) => OnChanges(rx, changed);
 

@@ -8,7 +8,9 @@ namespace TestCat
 {
     public partial class Form1 : Form
     {
+        IAnyRigEngine engine;
         IRigCore rig;
+
         //RigCore rigCore;
 
         public Form1()
@@ -96,35 +98,35 @@ namespace TestCat
 
             if (rbLibrary.Checked)
             {
-                AnyRigConfig config = ConfigManager.Load();
-                RigCore[] rigs = ConfigManager.LoadRigs(config);
-
-                if (rigs.Length > nRig)
-                {
-                    RigCore rigCore = rigs[nRig];
-
-                    rigCore.Log += (text) => Debug.WriteLine(text);
-                    rigCore.InternalLog += (text) => Debug.WriteLine(text);
-
-                    rigCore.Start();
-
-                    rig = rigCore;
-
-                }
-
+                engine = new AnyRigEngine();
             }
             else if (rbSocket.Checked)
             {
-                rig = new SocketRigWrapper(nRig);
+                engine = new SocketRigEngine();
             }
             else if (rbNetpipe.Checked)
             {
-                rig = new NetpipeRigWrapper(nRig);
+                engine = new NetpipeRigEngine();                
             }
 
-            rig.NotifyChanges = (rx, changed) => OnChanges(rx, changed);
+            rig = engine.GetRig(nRig);
 
-            var rigList = rig.GetRigsList();
+            if (rig != null)
+            {                
+                rig.NotifyChanges = (rx, changed) => OnChanges(rx, changed);
+
+                RigCore rigCore = rig as RigCore;
+                if (rigCore != null)
+                {
+                    rigCore.Log += (text) => Debug.WriteLine(text);
+                    rigCore.InternalLog += (text) => Debug.WriteLine(text);
+                }
+
+                rig.Start();
+
+            }
+
+            var rigList = engine.GetRigsList();
             if (rigList != null)
             {                
                 cbRadio.SelectedIndexChanged -= rbMethod_Click;

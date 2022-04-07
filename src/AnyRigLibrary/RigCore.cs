@@ -38,6 +38,11 @@ namespace AnyRigLibrary
             onAirTime = DateTime.Now.AddSeconds(30);
         }
 
+        public RigCore(int rigNumber, AnyRigConfig config) : this()
+        {
+            SetSettings(rigNumber, config);
+        }
+
         //------------------------------------------------------------------------------
         //                              properties
         //------------------------------------------------------------------------------
@@ -83,7 +88,7 @@ namespace AnyRigLibrary
             this.rigNumber = rigNumber;
             this.config = config;
 
-            config.Rigs[rigNumber].RunningRig = this;
+            //config.Rigs[rigNumber].RunningRig = this;
 
             FRig.Stop();
             try
@@ -362,6 +367,7 @@ namespace AnyRigLibrary
             FRig.AddWriteCommand(TRigParam.pmRit0);
         }
 
+        /*
         public List<RigBaseData> GetRigsList()
         {
             List<RigBaseData> result = new List<RigBaseData>();
@@ -379,6 +385,7 @@ namespace AnyRigLibrary
             return result;
 
         }
+        */
 
         public void SetSimplexMode(long Freq)
         {

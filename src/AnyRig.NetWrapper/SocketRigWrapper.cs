@@ -7,7 +7,8 @@
         { }
 
         public SocketRigWrapper(int nRig) : base(nRig)
-        { }
+        { 
+        }
 
         public override BaseAnyRigCommandWrapper InitCommandWrapper() => new SocketCommandWrapper();
 

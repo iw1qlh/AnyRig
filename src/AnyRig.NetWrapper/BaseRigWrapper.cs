@@ -226,6 +226,7 @@ namespace AnyRigNetWrapper
             sendCommand(RigCoreCommands.CMD_DISABLE_ONAIR);
         }
 
+        /*
         public List<RigBaseData> GetRigsList()
         {
             List<RigBaseData> result = null;
@@ -242,6 +243,7 @@ namespace AnyRigNetWrapper
             return result;
 
         }
+        */
 
         public void SendCustomCommand(string Command)
         {
