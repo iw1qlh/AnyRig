@@ -55,6 +55,8 @@ namespace TestCat
             this.btnClearRit = new System.Windows.Forms.Button();
             this.nudRit = new System.Windows.Forms.NumericUpDown();
             this.cbRadio = new System.Windows.Forms.ComboBox();
+            this.BtnUp = new System.Windows.Forms.Button();
+            this.BtnDown = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudRit)).BeginInit();
             this.SuspendLayout();
@@ -63,9 +65,10 @@ namespace TestCat
             // 
             this.LblFreq.Font = new System.Drawing.Font("Digital Readout Upright", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.LblFreq.ForeColor = System.Drawing.Color.DarkGreen;
-            this.LblFreq.Location = new System.Drawing.Point(25, 24);
+            this.LblFreq.Location = new System.Drawing.Point(29, 28);
+            this.LblFreq.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LblFreq.Name = "LblFreq";
-            this.LblFreq.Size = new System.Drawing.Size(158, 24);
+            this.LblFreq.Size = new System.Drawing.Size(184, 28);
             this.LblFreq.TabIndex = 0;
             this.LblFreq.Text = "29999";
             this.LblFreq.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -73,27 +76,30 @@ namespace TestCat
             // LblChanges
             // 
             this.LblChanges.AutoSize = true;
-            this.LblChanges.Location = new System.Drawing.Point(25, 298);
+            this.LblChanges.Location = new System.Drawing.Point(29, 344);
+            this.LblChanges.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LblChanges.Name = "LblChanges";
-            this.LblChanges.Size = new System.Drawing.Size(35, 13);
+            this.LblChanges.Size = new System.Drawing.Size(38, 15);
             this.LblChanges.TabIndex = 2;
             this.LblChanges.Text = "label1";
             // 
             // LblMode
             // 
             this.LblMode.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblMode.Location = new System.Drawing.Point(25, 81);
+            this.LblMode.Location = new System.Drawing.Point(29, 93);
+            this.LblMode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LblMode.Name = "LblMode";
-            this.LblMode.Size = new System.Drawing.Size(158, 21);
+            this.LblMode.Size = new System.Drawing.Size(184, 24);
             this.LblMode.TabIndex = 1;
             this.LblMode.Text = "label1";
             this.LblMode.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // BtnLsb
             // 
-            this.BtnLsb.Location = new System.Drawing.Point(25, 159);
+            this.BtnLsb.Location = new System.Drawing.Point(29, 183);
+            this.BtnLsb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BtnLsb.Name = "BtnLsb";
-            this.BtnLsb.Size = new System.Drawing.Size(75, 23);
+            this.BtnLsb.Size = new System.Drawing.Size(88, 27);
             this.BtnLsb.TabIndex = 3;
             this.BtnLsb.Tag = "";
             this.BtnLsb.Text = "LSB";
@@ -102,9 +108,10 @@ namespace TestCat
             // 
             // BtnCw
             // 
-            this.BtnCw.Location = new System.Drawing.Point(25, 187);
+            this.BtnCw.Location = new System.Drawing.Point(29, 216);
+            this.BtnCw.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BtnCw.Name = "BtnCw";
-            this.BtnCw.Size = new System.Drawing.Size(75, 23);
+            this.BtnCw.Size = new System.Drawing.Size(88, 27);
             this.BtnCw.TabIndex = 5;
             this.BtnCw.Text = "CW";
             this.BtnCw.UseVisualStyleBackColor = true;
@@ -118,9 +125,10 @@ namespace TestCat
             // 
             // BtnUsb
             // 
-            this.BtnUsb.Location = new System.Drawing.Point(107, 159);
+            this.BtnUsb.Location = new System.Drawing.Point(125, 183);
+            this.BtnUsb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BtnUsb.Name = "BtnUsb";
-            this.BtnUsb.Size = new System.Drawing.Size(75, 23);
+            this.BtnUsb.Size = new System.Drawing.Size(88, 27);
             this.BtnUsb.TabIndex = 4;
             this.BtnUsb.Text = "USB";
             this.BtnUsb.UseVisualStyleBackColor = true;
@@ -128,9 +136,10 @@ namespace TestCat
             // 
             // BtnFm
             // 
-            this.BtnFm.Location = new System.Drawing.Point(25, 216);
+            this.BtnFm.Location = new System.Drawing.Point(29, 249);
+            this.BtnFm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BtnFm.Name = "BtnFm";
-            this.BtnFm.Size = new System.Drawing.Size(75, 23);
+            this.BtnFm.Size = new System.Drawing.Size(88, 27);
             this.BtnFm.TabIndex = 6;
             this.BtnFm.Text = "FM";
             this.BtnFm.UseVisualStyleBackColor = true;
@@ -138,9 +147,10 @@ namespace TestCat
             // 
             // BtnAm
             // 
-            this.BtnAm.Location = new System.Drawing.Point(107, 216);
+            this.BtnAm.Location = new System.Drawing.Point(125, 249);
+            this.BtnAm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BtnAm.Name = "BtnAm";
-            this.BtnAm.Size = new System.Drawing.Size(75, 23);
+            this.BtnAm.Size = new System.Drawing.Size(88, 27);
             this.BtnAm.TabIndex = 7;
             this.BtnAm.Text = "AM";
             this.BtnAm.UseVisualStyleBackColor = true;
@@ -151,9 +161,11 @@ namespace TestCat
             this.groupBox1.Controls.Add(this.rbNetpipe);
             this.groupBox1.Controls.Add(this.rbSocket);
             this.groupBox1.Controls.Add(this.rbLibrary);
-            this.groupBox1.Location = new System.Drawing.Point(228, 12);
+            this.groupBox1.Location = new System.Drawing.Point(266, 14);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(116, 96);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox1.Size = new System.Drawing.Size(135, 111);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Method";
@@ -161,9 +173,10 @@ namespace TestCat
             // rbNetpipe
             // 
             this.rbNetpipe.AutoSize = true;
-            this.rbNetpipe.Location = new System.Drawing.Point(6, 66);
+            this.rbNetpipe.Location = new System.Drawing.Point(7, 76);
+            this.rbNetpipe.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rbNetpipe.Name = "rbNetpipe";
-            this.rbNetpipe.Size = new System.Drawing.Size(62, 17);
+            this.rbNetpipe.Size = new System.Drawing.Size(67, 19);
             this.rbNetpipe.TabIndex = 2;
             this.rbNetpipe.TabStop = true;
             this.rbNetpipe.Text = "Netpipe";
@@ -173,9 +186,10 @@ namespace TestCat
             // rbSocket
             // 
             this.rbSocket.AutoSize = true;
-            this.rbSocket.Location = new System.Drawing.Point(6, 43);
+            this.rbSocket.Location = new System.Drawing.Point(7, 50);
+            this.rbSocket.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rbSocket.Name = "rbSocket";
-            this.rbSocket.Size = new System.Drawing.Size(57, 17);
+            this.rbSocket.Size = new System.Drawing.Size(60, 19);
             this.rbSocket.TabIndex = 1;
             this.rbSocket.TabStop = true;
             this.rbSocket.Text = "Socket";
@@ -185,9 +199,10 @@ namespace TestCat
             // rbLibrary
             // 
             this.rbLibrary.AutoSize = true;
-            this.rbLibrary.Location = new System.Drawing.Point(6, 20);
+            this.rbLibrary.Location = new System.Drawing.Point(7, 23);
+            this.rbLibrary.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rbLibrary.Name = "rbLibrary";
-            this.rbLibrary.Size = new System.Drawing.Size(58, 17);
+            this.rbLibrary.Size = new System.Drawing.Size(61, 19);
             this.rbLibrary.TabIndex = 0;
             this.rbLibrary.TabStop = true;
             this.rbLibrary.Text = "Library";
@@ -196,9 +211,10 @@ namespace TestCat
             // 
             // btnRit
             // 
-            this.btnRit.Location = new System.Drawing.Point(25, 259);
+            this.btnRit.Location = new System.Drawing.Point(29, 299);
+            this.btnRit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnRit.Name = "btnRit";
-            this.btnRit.Size = new System.Drawing.Size(64, 20);
+            this.btnRit.Size = new System.Drawing.Size(75, 23);
             this.btnRit.TabIndex = 9;
             this.btnRit.Text = "RIT";
             this.btnRit.UseVisualStyleBackColor = true;
@@ -206,9 +222,10 @@ namespace TestCat
             // 
             // btnXit
             // 
-            this.btnXit.Location = new System.Drawing.Point(107, 259);
+            this.btnXit.Location = new System.Drawing.Point(125, 299);
+            this.btnXit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnXit.Name = "btnXit";
-            this.btnXit.Size = new System.Drawing.Size(64, 20);
+            this.btnXit.Size = new System.Drawing.Size(75, 23);
             this.btnXit.TabIndex = 10;
             this.btnXit.Text = "XIT";
             this.btnXit.UseVisualStyleBackColor = true;
@@ -216,9 +233,10 @@ namespace TestCat
             // 
             // btnSplit
             // 
-            this.btnSplit.Location = new System.Drawing.Point(221, 187);
+            this.btnSplit.Location = new System.Drawing.Point(258, 216);
+            this.btnSplit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnSplit.Name = "btnSplit";
-            this.btnSplit.Size = new System.Drawing.Size(64, 20);
+            this.btnSplit.Size = new System.Drawing.Size(75, 23);
             this.btnSplit.TabIndex = 11;
             this.btnSplit.Text = "SPLIT";
             this.btnSplit.UseVisualStyleBackColor = true;
@@ -226,9 +244,10 @@ namespace TestCat
             // 
             // btnTx
             // 
-            this.btnTx.Location = new System.Drawing.Point(221, 216);
+            this.btnTx.Location = new System.Drawing.Point(258, 249);
+            this.btnTx.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnTx.Name = "btnTx";
-            this.btnTx.Size = new System.Drawing.Size(64, 20);
+            this.btnTx.Size = new System.Drawing.Size(75, 23);
             this.btnTx.TabIndex = 12;
             this.btnTx.Text = "TX";
             this.btnTx.UseVisualStyleBackColor = true;
@@ -238,9 +257,10 @@ namespace TestCat
             // 
             this.lblFreqA.Font = new System.Drawing.Font("Digital Readout Upright", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblFreqA.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblFreqA.Location = new System.Drawing.Point(25, 58);
+            this.lblFreqA.Location = new System.Drawing.Point(29, 67);
+            this.lblFreqA.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFreqA.Name = "lblFreqA";
-            this.lblFreqA.Size = new System.Drawing.Size(77, 11);
+            this.lblFreqA.Size = new System.Drawing.Size(90, 13);
             this.lblFreqA.TabIndex = 13;
             this.lblFreqA.Text = "29999";
             this.lblFreqA.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -249,18 +269,20 @@ namespace TestCat
             // 
             this.lblFreqB.Font = new System.Drawing.Font("Digital Readout Upright", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblFreqB.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblFreqB.Location = new System.Drawing.Point(105, 58);
+            this.lblFreqB.Location = new System.Drawing.Point(122, 67);
+            this.lblFreqB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFreqB.Name = "lblFreqB";
-            this.lblFreqB.Size = new System.Drawing.Size(77, 11);
+            this.lblFreqB.Size = new System.Drawing.Size(90, 13);
             this.lblFreqB.TabIndex = 14;
             this.lblFreqB.Text = "29999";
             this.lblFreqB.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btnVfoA
             // 
-            this.btnVfoA.Location = new System.Drawing.Point(221, 159);
+            this.btnVfoA.Location = new System.Drawing.Point(258, 183);
+            this.btnVfoA.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnVfoA.Name = "btnVfoA";
-            this.btnVfoA.Size = new System.Drawing.Size(64, 20);
+            this.btnVfoA.Size = new System.Drawing.Size(75, 23);
             this.btnVfoA.TabIndex = 15;
             this.btnVfoA.Text = "VFO A";
             this.btnVfoA.UseVisualStyleBackColor = true;
@@ -268,9 +290,10 @@ namespace TestCat
             // 
             // btnVfoB
             // 
-            this.btnVfoB.Location = new System.Drawing.Point(291, 159);
+            this.btnVfoB.Location = new System.Drawing.Point(340, 183);
+            this.btnVfoB.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnVfoB.Name = "btnVfoB";
-            this.btnVfoB.Size = new System.Drawing.Size(64, 20);
+            this.btnVfoB.Size = new System.Drawing.Size(75, 23);
             this.btnVfoB.TabIndex = 16;
             this.btnVfoB.Text = "VFO B";
             this.btnVfoB.UseVisualStyleBackColor = true;
@@ -278,9 +301,10 @@ namespace TestCat
             // 
             // btnClearRit
             // 
-            this.btnClearRit.Location = new System.Drawing.Point(269, 259);
+            this.btnClearRit.Location = new System.Drawing.Point(314, 299);
+            this.btnClearRit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClearRit.Name = "btnClearRit";
-            this.btnClearRit.Size = new System.Drawing.Size(64, 20);
+            this.btnClearRit.Size = new System.Drawing.Size(75, 23);
             this.btnClearRit.TabIndex = 17;
             this.btnClearRit.Text = "CLEAR";
             this.btnClearRit.UseVisualStyleBackColor = true;
@@ -288,7 +312,8 @@ namespace TestCat
             // 
             // nudRit
             // 
-            this.nudRit.Location = new System.Drawing.Point(190, 259);
+            this.nudRit.Location = new System.Drawing.Point(222, 299);
+            this.nudRit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.nudRit.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -300,7 +325,7 @@ namespace TestCat
             0,
             -2147483648});
             this.nudRit.Name = "nudRit";
-            this.nudRit.Size = new System.Drawing.Size(65, 21);
+            this.nudRit.Size = new System.Drawing.Size(76, 23);
             this.nudRit.TabIndex = 18;
             this.nudRit.ValueChanged += new System.EventHandler(this.nudRit_ValueChanged);
             // 
@@ -308,16 +333,39 @@ namespace TestCat
             // 
             this.cbRadio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRadio.FormattingEnabled = true;
-            this.cbRadio.Location = new System.Drawing.Point(228, 114);
+            this.cbRadio.Location = new System.Drawing.Point(266, 132);
+            this.cbRadio.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbRadio.Name = "cbRadio";
-            this.cbRadio.Size = new System.Drawing.Size(116, 21);
+            this.cbRadio.Size = new System.Drawing.Size(135, 23);
             this.cbRadio.TabIndex = 19;
+            // 
+            // BtnUp
+            // 
+            this.BtnUp.Location = new System.Drawing.Point(224, 21);
+            this.BtnUp.Name = "BtnUp";
+            this.BtnUp.Size = new System.Drawing.Size(35, 23);
+            this.BtnUp.TabIndex = 20;
+            this.BtnUp.Text = "+";
+            this.BtnUp.UseVisualStyleBackColor = true;
+            this.BtnUp.Click += new System.EventHandler(this.BtnUp_Click);
+            // 
+            // BtnDown
+            // 
+            this.BtnDown.Location = new System.Drawing.Point(224, 44);
+            this.BtnDown.Name = "BtnDown";
+            this.BtnDown.Size = new System.Drawing.Size(35, 23);
+            this.BtnDown.TabIndex = 21;
+            this.BtnDown.Text = "-";
+            this.BtnDown.UseVisualStyleBackColor = true;
+            this.BtnDown.Click += new System.EventHandler(this.BtnDown_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 332);
+            this.ClientSize = new System.Drawing.Size(443, 383);
+            this.Controls.Add(this.BtnDown);
+            this.Controls.Add(this.BtnUp);
             this.Controls.Add(this.cbRadio);
             this.Controls.Add(this.nudRit);
             this.Controls.Add(this.btnClearRit);
@@ -338,6 +386,7 @@ namespace TestCat
             this.Controls.Add(this.LblMode);
             this.Controls.Add(this.LblChanges);
             this.Controls.Add(this.LblFreq);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "Form1";
             this.Text = "TestCat (AnyRigLibrary)";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
@@ -375,5 +424,7 @@ namespace TestCat
         private Button btnClearRit;
         private NumericUpDown nudRit;
         private ComboBox cbRadio;
+        private Button BtnUp;
+        private Button BtnDown;
     }
 }

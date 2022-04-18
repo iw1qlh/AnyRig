@@ -115,7 +115,7 @@ namespace AnyRigLibrary
             }
             finally
             {
-                FRig.Enabled = true;
+                //FRig.Enabled = true;
             }
 
         }

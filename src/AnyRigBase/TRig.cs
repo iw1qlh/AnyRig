@@ -140,7 +140,7 @@ namespace AnyRigBase
         {
             bool Result;
 
-            if (AMask.Mask == null)
+            if (AMask?.Mask == null)
                 Result = true;
             else if (AData.Length != AMask.Mask.Length)
                 Result = false;
@@ -236,7 +236,7 @@ namespace AnyRigBase
             int finalLen;
             int diffLen;
             */
-            long Value2 = AValue;
+            long Value2;
             int newSize;
 
             Value = (long)Math.Round(AValue * AInfo.Mult + AInfo.Add);
@@ -253,6 +253,7 @@ namespace AnyRigBase
             diffLen = finalLen - initLen;
             Log?.Invoke($"size difference is {diffLen}");
             */
+            Value2 = Value;
 
             Result = null;
             newSize = AInfo.Len;

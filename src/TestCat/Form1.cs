@@ -180,5 +180,15 @@ namespace TestCat
             rig.RitOffset = (int)nudRit.Value;
 
         }
+
+        private void BtnUp_Click(object sender, EventArgs e)
+        {
+            rig.Freq = (rig.Freq / 1000 + 1) * 1000;
+        }
+
+        private void BtnDown_Click(object sender, EventArgs e)
+        {
+            rig.Freq = (rig.Freq / 1000 - 1) * 1000;
+        }
     }
 }
