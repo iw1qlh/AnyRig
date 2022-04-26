@@ -5,15 +5,17 @@ namespace AnyRigLibrary.Models
     public class RigSettings
     {
         public string RigType { get; set; }
-        public string Port { get; set; }
 
+        public string CommName { get; set; } = "COM1,9600,N,8,1,H,H";
+        /*
+        public string Port { get; set; }
         public int BaudRate { get; set; } = 9600;
         public int DataBits { get; set; } = 8;
         public string Parity { get; set; } = "N";
         public string StopBits { get; set; } = "1";
-
         public string RtsMode { get; set; } = "H";
         public bool DtrMode { get; set; } = true;
+        */
         public int PollMs { get; set; } = 500;
         public int TimeoutMs { get; set; } = 3000;
         public bool Enabled { get; set; }

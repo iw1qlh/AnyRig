@@ -28,9 +28,9 @@ namespace AnyRigLibrary
         //                              ctor
         //------------------------------------------------------------------------------
 
-        public RigCore()
+        public RigCore(BaseCommPort commPort = null)
         {
-            FRig = new TRig();
+            FRig = new TRig(commPort);
             FRig.Tick = () => { FRig_Tick(); };
             FRig.NotifyParams = (rigNumber, Params) => { NotifyParams(rigNumber, Params); };
             FRig.Log = (text) => { FRig_Log(text); };
@@ -38,7 +38,7 @@ namespace AnyRigLibrary
             onAirTime = DateTime.Now.AddSeconds(30);
         }
 
-        public RigCore(int rigNumber, AnyRigConfig config) : this()
+        public RigCore(int rigNumber, AnyRigConfig config, BaseCommPort commPort = null) : this(commPort)
         {
             SetSettings(rigNumber, config);
         }
@@ -94,6 +94,8 @@ namespace AnyRigLibrary
             try
             {
                 FRig.RigType = Settings.RigType;
+                FRig.ComPort.CommName = Settings.CommName;
+                /*
                 FRig.ComPort.PortName = Settings.Port;
                 FRig.ComPort.BaudRate = Settings.BaudRate;
                 FRig.ComPort.DataBits = Settings.DataBits;
@@ -101,6 +103,7 @@ namespace AnyRigLibrary
                 FRig.ComPort.StopBits = CommPort.ToStopBits(Settings.StopBits);
                 FRig.ComPort.DtrMode = Settings.DtrMode;
                 FRig.ComPort.RtsMode = Settings.RtsMode == "H";
+                */
                 FRig.PollMs = Settings.PollMs;
                 FRig.TimeoutMs = Settings.TimeoutMs;
                 FRig.RigNumber = rigNumber;

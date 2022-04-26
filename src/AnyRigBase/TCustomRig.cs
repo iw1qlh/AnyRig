@@ -72,7 +72,7 @@ namespace AnyRigBase
         public int RigNumber;
         public int PollMs;
         public int TimeoutMs;
-        public CommPort ComPort;
+        public BaseCommPort ComPort;
         public TRigParam LastWrittenMode;
 
         public abstract void AddWriteCommand(TRigParam AParam, long Value = 0);
@@ -166,15 +166,15 @@ namespace AnyRigBase
             set { SetMode(value); }
         }
 
-        public TCustomRig()
+        public TCustomRig(BaseCommPort commPort = null)
         {
             
             FQueue = new TCommandQueue();
             
-            ComPort = new CommPort();
+            ComPort = commPort ?? new CommPort();
             ComPort.OnReceived = (sender) => RecvEvent(sender);
             ComPort.OnSent = (sender) => SentEvent(sender);
-            ComPort.OnCtsDsr = (sender, pinChange) => CtsDsrEvent(sender, pinChange);
+            ComPort.OnChanges = (sender, pinChange) => CtsDsrEvent(sender, pinChange);
             ComPort.OnError = (sender, error) => Log?.Invoke($"SerialPort error: {error}");
 
             PollMs = 500;
@@ -459,9 +459,14 @@ namespace AnyRigBase
         }
 
         private string BoolStr(bool value) => value ? "ON" : "OFF";
-        private void CtsDsrEvent(object Sender, SerialPinChange pinChange)
+        private void CtsDsrEvent(object Sender, object change)
         {
-            Log?.Invoke($"RIG{RigNumber} ctrl bits: CTS={BoolStr(ComPort.CtsBit)} DSR={BoolStr(ComPort.DsrBit)} RLS={BoolStr(ComPort.RlsdBit)}");
+            if (change is SerialPinChange)
+            {
+                SerialPinChange pinChange = (SerialPinChange)change;
+                //Log?.Invoke($"RIG{RigNumber} ctrl bits: CTS={BoolStr(ComPort.CtsBit)} DSR={BoolStr(ComPort.DsrBit)} RLS={BoolStr(ComPort.RlsdBit)}");
+                Log?.Invoke($"RIG{RigNumber} SerialPinChange: {change}");
+            }
         }
 
         //------------------------------------------------------------------------------
@@ -523,11 +528,11 @@ namespace AnyRigBase
                     ComPort.RxBlockSize = q.ReplyLength;
                     ComPort.RxBlockTerminator = q.ReplyEnd;
                     if (!string.IsNullOrEmpty(q.ReplyEnd))
-                        ComPort.RxBlockMode = CommPort.TRxBlockMode.rbTerminator;
+                        ComPort.RxBlockMode = BaseCommPort.TRxBlockMode.rbTerminator;
                     else if (q.ReplyLength > 0)
-                        ComPort.RxBlockMode = CommPort.TRxBlockMode.rbBlockSize;
+                        ComPort.RxBlockMode = BaseCommPort.TRxBlockMode.rbBlockSize;
                     else
-                        ComPort.RxBlockMode = CommPort.TRxBlockMode.rbChar;
+                        ComPort.RxBlockMode = BaseCommPort.TRxBlockMode.rbChar;
 
 
                     //log
@@ -626,7 +631,7 @@ namespace AnyRigBase
                             Log?.Invoke($"RIG{RigNumber} !recv timeout. RX Buffer: {ByteArray.ByteToHex(ComPort.RxBuffer)}");
                             //waste partial reply
                             ComPort.PurgeRx();
-                            ComPort.RxBlockMode = CommPort.TRxBlockMode.rbChar;
+                            ComPort.RxBlockMode = BaseCommPort.TRxBlockMode.rbChar;
                             //consider current cmd unreplied
                             FQueue.Delete(0);
                             //allow next cmd

@@ -1,5 +1,6 @@
 ﻿using AnyRigBase.Helpers;
 using AnyRigBase.Models;
+using AnyRigBase.Services;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -12,6 +13,10 @@ namespace AnyRigBase
         //private long ExtMicroFreq;
 
         protected List<TRigParam> ChangedParams = new List<TRigParam>();
+
+        public TRig(BaseCommPort commPort = null) : base(commPort)
+        {
+        }
 
         public Action<int, object> NotifyCustom { get; set; }
         public Action<int, long> NotifyParams { get; set; }

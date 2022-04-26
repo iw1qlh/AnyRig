@@ -472,6 +472,8 @@ namespace AnyRigConfig
 
                 rig.Enabled = cbEnabled.Checked;
                 rig.RigType = ddlRigType.Text.ToString();
+                rig.CommName = $"{ddlSerialPort.Text},{ddlBaudRates.Text},{ddlParity.Text.ToString().FirstOrDefault()},{ddlDataBits.Text},{ddlStopBits.Text},{ddlRtsModes.Text.ToString().FirstOrDefault()},{ddlDtrModes.Text.ToString().FirstOrDefault()}";
+                /*
                 rig.Port = ddlSerialPort.Text.ToString();
                 rig.BaudRate = int.Parse(ddlBaudRates.Text.ToString());
                 rig.DataBits = int.Parse(ddlDataBits.Text.ToString());
@@ -479,6 +481,7 @@ namespace AnyRigConfig
                 rig.StopBits = ddlStopBits.Text.ToString();
                 rig.RtsMode = ddlRtsModes.Text.ToString().FirstOrDefault().ToString();
                 rig.DtrMode = ddlDtrModes.Text.ToString().StartsWith("H");
+                */
                 rig.PollMs = ifPool.Value;
                 rig.TimeoutMs = ifTimeout.Value;
                 rig.SendOnAir = cbSendOnAir.Checked;
@@ -523,13 +526,42 @@ namespace AnyRigConfig
 
         private List<string> GetRigList()
         {
-            return config.Rigs.Select(s => $"{(s.Enabled ? Driver.Checked.ToString() : Driver.UnChecked.ToString()) } {s.RigType} ({s.Port})").ToList();
+            return config.Rigs.Select(s => $"{(s.Enabled ? Driver.Checked.ToString() : Driver.UnChecked.ToString()) } {s.RigType} ({s.CommName})").ToList();
         }
 
         private void LoadRigSettings(AnyRigLibrary.Models.RigSettings rig)
         {
             cbEnabled.Checked = rig.Enabled;
             ddlRigType.Text = rig.RigType ?? "";
+
+            ddlSerialPort.Text = "COM1";
+            ddlBaudRates.Text = "9600";
+            ddlParity.Text = "N";
+            ddlDataBits.Text = "8";            
+            ddlStopBits.Text = "0";
+            ddlRtsModes.Text = "H";
+            ddlDtrModes.Text = "H";
+
+            string[] p = rig.CommName.Split(',');
+            for (int i = 0; i < p.Length; i++)
+            {
+                try
+                {
+                    switch (i)
+                    {
+                        case 0: ddlSerialPort.Text = p[i]; break;
+                        case 1: ddlBaudRates.Text = p[i]; break;
+                        case 2: ddlParity.Text = CommPort.SupportedParities.FirstOrDefault(w => w.StartsWith(p[i])); break;
+                        case 3: ddlDataBits.Text = p[i]; break;
+                        case 4: ddlStopBits.Text = p[i]; break;
+                        case 5: ddlRtsModes.Text = CommPort.SupportedRtsMode.FirstOrDefault(w => w.StartsWith(p[i])); break;
+                        case 6: ddlDtrModes.Text = CommPort.SupportedDtrMode.FirstOrDefault(w => w.StartsWith(p[i])); break;
+                    }
+                }
+                catch { }
+            }
+
+            /*            
             ddlSerialPort.Text = rig.Port ?? "COM1";
             ddlBaudRates.Text = rig.BaudRate.ToString();
             ddlDataBits.Text = rig.DataBits.ToString();
@@ -537,6 +569,8 @@ namespace AnyRigConfig
             ddlStopBits.Text = rig.StopBits ?? "0";
             ddlRtsModes.Text = CommPort.SupportedRtsMode.FirstOrDefault(w => w.StartsWith(rig.RtsMode ?? "H"));
             ddlDtrModes.Text = rig.DtrMode ? "High" : "Low";
+            */
+
             ifPool.Value = rig.PollMs;
             ifTimeout.Value = rig.TimeoutMs;
             cbSendOnAir.Checked = rig.SendOnAir;

@@ -3,10 +3,11 @@ using System;
 using System.IO.Ports;
 using System.Threading;
 using System.Threading.Tasks;
+//using static AnyRigBase.Services.MultiCommPort;
 
 namespace AnyRigBase.Services
 {
-    public class CommPort
+    public class CommPort : BaseCommPort
     {
         public static readonly int[] SupportedBaudRates = new int[]
         {
@@ -38,21 +39,13 @@ namespace AnyRigBase.Services
         public static readonly string[] SupportedDtrMode = new string[]
         {
             "High", "Low"
-        };
-
-        public enum TRxBlockMode { rbChar, rbBlockSize, rbTerminator };
-
-        const int BUF_SIZE = 1024;
+        };             
 
         private SerialPort com;
 
         //public int Port;
         
         public long TimeStamp;
-
-        public TRxBlockMode RxBlockMode;
-        public int RxBlockSize;
-        public string RxBlockTerminator;
 
         public string PortName { get => com.PortName; set { com.PortName = value; } }
         public int BaudRate { get => com.BaudRate; set { com.BaudRate = value; } }
@@ -63,34 +56,8 @@ namespace AnyRigBase.Services
         public bool RtsMode { get => com.RtsEnable; set { SetRtsMode(value); } }
         public bool RlsdBit { get => com.CDHolding; }
 
-        public bool Open { get => com.IsOpen; set { SetOpen(value); } }
-
-        public int TxQueue { get => com.BytesToWrite; }
-
-        public byte[] RxBuffer
-        {
-            get
-            {
-                
-                int size = rxBuffPtr;
-                if (size == 0)
-                    return new byte[0];
-                byte[] buff = new byte[size];
-                Array.Copy(rxBuffer, buff, size);
-                return buff;
-            }
-        }
-
         public bool CtsBit { get => com.CtsHolding; }
-        public bool DsrBit { get => com.DsrHolding; }
-
-        public Action<object, SerialError> OnError { get; set; }
-        public Action<object> OnSent { get; set; }
-        public Action<object> OnReceived { get; set; }
-        public Action<object, SerialPinChange> OnCtsDsr { get; set; }
-
-        private byte[] rxBuffer;
-        private int rxBuffPtr;
+        public bool DsrBit { get => com.DsrHolding; }        
 
         public CommPort()
         {
@@ -118,20 +85,21 @@ namespace AnyRigBase.Services
             com.Close();
         }
 
+        public override void SetName(string value)
+        {
+            ConfigurePort(value);
+        }
+
         //------------------------------------------------------------------------------
         //                             open/close
         //------------------------------------------------------------------------------
-        private void SetOpen(bool value)
+
+        public override bool IsOpen()
         {
-            if (value == Open)
-                return;
-            if (value)
-                OpenPort();
-            else
-                ClosePort();
+            return com.IsOpen;
         }
 
-        public void OpenPort()  //TODO private?
+        public override void OpenPort()  //TODO private?
         {
             com.DataReceived += Com_DataReceived;
             com.ErrorReceived += Com_ErrorReceived;
@@ -140,7 +108,7 @@ namespace AnyRigBase.Services
             com.Open();
         }
 
-        private void ClosePort()
+        public override void ClosePort()
         {
             com.PinChanged -= Com_PinChanged;            
             com.ErrorReceived -= Com_ErrorReceived;
@@ -151,7 +119,7 @@ namespace AnyRigBase.Services
             com.Close();
         }
 
-        // COM3,115200,N,8,1
+        // COM3,115200,N,8,1,H,H
         public void ConfigurePort(string config)
         {
             int n;
@@ -159,22 +127,23 @@ namespace AnyRigBase.Services
             string[] p = config.Split(',');
             for (int i = 0; i < p.Length; i++)
             {
-                if (i == 0)
-                    com.PortName = p[i];
-                if ((i == 1) && int.TryParse(p[i], out n))
-                    com.BaudRate = n;
-                if (i == 2)
+                switch (i)
                 {
-                    com.Parity = ToParity(p[i]);
-                }
-                if ((i == 3) && int.TryParse(p[i], out n))
-                    com.DataBits = n;
-                if (i == 4)
-                {
-                    com.StopBits = ToStopBits(p[i]);
+                    case 0: com.PortName = p[i]; break;
+                    case 1:
+                        if (int.TryParse(p[i], out n))
+                            com.BaudRate = n;
+                        break;
+                    case 2: com.Parity = ToParity(p[i]); break;
+                    case 3: 
+                        if (int.TryParse(p[i], out n))
+                            com.DataBits = n;
+                        break;
+                    case 4: com.StopBits = ToStopBits(p[i]); break;
+                    case 5: SetRtsMode(p[i].StartsWith("H")); break;
+                    case 6: SetDtrMode(p[i].StartsWith("H")); break;
                 }
             }
-
         }
 
         public static Parity ToParity(string parity)
@@ -229,28 +198,21 @@ namespace AnyRigBase.Services
 
         }
 
-        private void ClearRxBuffer()
-        {
-            rxBuffer = new byte[BUF_SIZE];
-            rxBuffPtr = 0;
-        }
-
-
         //------------------------------------------------------------------------------
         //                             read/write
         //------------------------------------------------------------------------------
-        public void PurgeRx()
+        public override void PurgeRx()
         {
             com.DiscardInBuffer();
             ClearRxBuffer();
         }
 
-        public void PurgeTx()
+        public override void PurgeTx()
         {
             com.DiscardOutBuffer();
         }
 
-        public void Send(byte[] buff)
+        public override void Send(byte[] buff)
         {
             if ((buff == null) || (buff.Length == 0))
                 return;
@@ -274,6 +236,11 @@ namespace AnyRigBase.Services
 
         }
 
+        public override int GetTxQueue()
+        {
+            return com.BytesToWrite;
+        }
+
         private void SetDtrMode(bool value)
         {
             com.DtrEnable = value;
@@ -290,55 +257,29 @@ namespace AnyRigBase.Services
         //------------------------------------------------------------------------------
         private void Com_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            bool Fire = true;
 
-            Monitor.Enter(rxBuffer);
-            try
-            {
-                //read rx count
-                int available = com.BytesToRead;
-                if (available == 0)
-                    return;
+            int available = com.BytesToRead;
+            if (available == 0)
+                return;
 
-                //read bytes
-                available = com.Read(rxBuffer, rxBuffPtr, available);
-                rxBuffPtr += available;
-                
-                switch (RxBlockMode)
-                {
-                    case TRxBlockMode.rbBlockSize:
-                        Fire = (rxBuffPtr >= RxBlockSize);
-                        break;
-                    case TRxBlockMode.rbTerminator:
-                        byte[] buff = RxBuffer;
-                        string text = ByteArray.BytesToStr(buff);
-                        Fire = text.Contains(RxBlockTerminator);
-                        break;
-                }
-            }
-            finally
-            {
-                Monitor.Exit(rxBuffer);
-            }
+            byte[] buffer = new byte[available];
 
-            //purge buffer
-            if (Fire)
-            {
-                OnReceived?.Invoke(this);
-                ClearRxBuffer();
-            }
+            //read bytes
+            available = com.Read(buffer, 0, available);
+
+            DataReceived(available, buffer);
 
         }
 
         private void Com_PinChanged(object sender, SerialPinChangedEventArgs e)
         {
-            OnCtsDsr?.Invoke(this, e.EventType);
+            OnChanges?.Invoke(this, e.EventType);
         }
 
         private void Com_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
         {
             OnError?.Invoke(this, e.EventType);
         }
-
+        
     }
 }
