@@ -1,5 +1,4 @@
 ﻿using AnyRigConfig.GuiExtensions;
-using AnyRigConfig.Helpers;
 using AnyRigLibrary;
 using AnyRigBase.Helpers;
 using AnyRigBase.Services;
@@ -9,6 +8,7 @@ using System.Security.Principal;
 using System.ServiceProcess;
 using Terminal.Gui;
 using System.Diagnostics;
+using AnyRigConfigCommon;
 
 namespace AnyRigConfig
 {
@@ -57,7 +57,7 @@ namespace AnyRigConfig
             Y = 1;
             top.Add(this);
 
-            CopyRigsFile();
+            ConfigCommon.CopyRigsFile();
 
             // MENU
 
@@ -233,12 +233,12 @@ namespace AnyRigConfig
 
             hrdView.Add(new Label(1, 1, "Ham365 user"));
             tfHrdUser = new TextField(18, 1, 12, "");
-            tfHrdUser.Text = config.HrdUser ?? "TEST";
+            //tfHrdUser.Text = config.HrdUser ?? "TEST";
             hrdView.Add(tfHrdUser);
 
             hrdView.Add(new Label(1, 3, "Upload code"));
             tfUploadCode = new TextField(18, 3, 12, "") { Secret = true };
-            tfUploadCode.Text = config.UploadCode ?? "0000000000";
+            //tfUploadCode.Text = config.UploadCode ?? "0000000000";
             hrdView.Add(tfUploadCode);
 
             cbViewCode = new CheckBox(18, 4, "View Code");
@@ -265,22 +265,22 @@ namespace AnyRigConfig
 
             servicesView.Add(new Label(1, 2, "TCP Socket port"));
             ifSocketPort = new IntegerField() { X = 18, Y = 2, Width = 10 };
-            ifSocketPort.Value = config.SocketPort;
+            //ifSocketPort.Value = config.SocketPort;
             servicesView.Add(ifSocketPort);
             cbSocketEnabled = new CheckBox(1, 3, "Enabled");
-            cbSocketEnabled.Checked = config.SocketEnabled;
+            //cbSocketEnabled.Checked = config.SocketEnabled;
             servicesView.Add(cbSocketEnabled);
 
             cbNetpipeEnabled = new CheckBox(1, 5, "Netpipe Enabled");
-            cbNetpipeEnabled.Checked = config.NetpipeEnabled;
+            //cbNetpipeEnabled.Checked = config.NetpipeEnabled;
             servicesView.Add(cbNetpipeEnabled);
 
             servicesView.Add(new Label(1, 7, "Web Socket port"));
             ifWebSocketPort = new IntegerField() { X = 18, Y = 7, Width = 10 };
-            ifWebSocketPort.Value = config.WebSocketPort;
+            //ifWebSocketPort.Value = config.WebSocketPort;
             servicesView.Add(ifWebSocketPort);
             cbWebSocketEnabled = new CheckBox(1, 8, "Enabled");
-            cbWebSocketEnabled.Checked = config.WebSocketEnabled;
+            //cbWebSocketEnabled.Checked = config.WebSocketEnabled;
             servicesView.Add(cbWebSocketEnabled);
 
             btnRestartService = new Button(18, 10, "Restart service");
@@ -297,12 +297,9 @@ namespace AnyRigConfig
 
             this.Add(tabView);
 
-            try
-            {
-                string bakFile = Path.Combine(PathHelpers.GetDataFolder(), "AnyRigLibrary.bak.json");
-                File.Copy(PathHelpers.ConfigPath(), bakFile, overwrite: true);
-            }
-            catch { }
+            Reload();
+
+            ConfigCommon.BackupConfig();
 
             adding = false;
             lvRigs.SelectedItem = 0;
@@ -310,20 +307,21 @@ namespace AnyRigConfig
 
         }
 
-        private void CopyRigsFile()
+        private void Reload()
         {
-            try
-            {
-                string source = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Rigs");
-                string dest = PathHelpers.GetRigsFolder();
-                string[] files = Directory.GetFiles(source, "*.INI");
-                foreach (string fileName in files)
-                {
-                    string dst = Path.Combine(dest, Path.GetFileName(fileName));
-                    File.Copy(fileName, dst, overwrite: false);
-                }
-            }
-            catch { }
+            lvRigs.SetSource(GetRigList());
+
+            tfHrdUser.Text = config.HrdUser ?? "TEST";
+            tfUploadCode.Text = config.UploadCode ?? "0000000000";
+
+            cbSocketEnabled.Checked = config.SocketEnabled;
+            ifSocketPort.Value = config.SocketPort;
+            cbNetpipeEnabled.Checked = config.NetpipeEnabled;
+            cbWebSocketEnabled.Checked = config.WebSocketEnabled;
+            ifWebSocketPort.Value = config.WebSocketPort;
+
+            SetViews();
+
         }
 
         private void RigsFolder_Clicked()
@@ -338,65 +336,7 @@ namespace AnyRigConfig
 
         private void BtnRestartService_Clicked()
         {
-
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-
-                if (new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator))
-                {
-
-                    ServiceController controller = new ServiceController("AnyRigService");
-
-                    Task.Factory.StartNew(() =>
-                    {
-                        TimeSpan timeout = TimeSpan.FromSeconds(5);
-
-                        try
-                        {
-
-                            if (controller.Status == ServiceControllerStatus.Running)
-                            {
-                                SetStatus("Stopping AnyRigService");
-                                controller.Stop ();
-                                controller.WaitForStatus(ServiceControllerStatus.Stopped, timeout);
-                                SetStatus("AnyRigService stopped");
-                                Thread.Sleep(1000);
-                            }
-
-                        }
-                        catch (Exception ex)
-                        {
-                            SetStatus(ex.Message);
-                            Thread.Sleep(5000);
-                        }
-
-
-                        try
-                        {
-
-                            if (controller.Status == ServiceControllerStatus.Stopped)
-                            {
-                                SetStatus("Starting AnyRigService");
-                                controller.Start();
-                                controller.WaitForStatus(ServiceControllerStatus.Running, timeout);
-                                SetStatus("AnyRigService started");
-                                Thread.Sleep(1000);
-                            }
-
-                        }
-                        catch (Exception ex)
-                        {
-                            SetStatus(ex.Message);
-                            Thread.Sleep(5000);
-                        }
-
-                    });
-                }
-                else
-                    MessageBox.Query("Warning", "You must \"Run as Administrator\" to start/stop services!", "Ok");
-
-            }
-
+            ConfigCommon.RestartWindowsService((status) => SetStatus(status));
         }
 
         private void BtnSaveHrd_Clicked()
@@ -638,26 +578,12 @@ namespace AnyRigConfig
 
         private void Revert_Clicked()
         {
-            string bakFile = Path.Combine(PathHelpers.GetDataFolder(), "AnyRigLibrary.bak.json");
-            if (File.Exists(bakFile) && MessageBox.Query("Revert to previous configuration", "Are you sure?", "Yes", "No") == 0)
-            {
-                try
-                {
-                    File.Copy(bakFile, PathHelpers.ConfigPath(), overwrite: true);
-                    config = ConfigManager.Load();
-
-                    lvRigs.SetSource(GetRigList());
-                    ifSocketPort.Value = config.SocketPort;
-
-                    SetStatus("Configuration has been reverted");
-
-                }
-                catch
-                {
-                    SetStatus("ERROR!");
-                }
-
-            }
+            ConfigCommon.Revert(
+                ref config, 
+                (title, message) => (MessageBox.Query(title, message, "Yes", "No") == 0), 
+                (status) => SetStatus(status), 
+                () => Reload()
+            );
         }
 
         private void About_Clicked()
@@ -668,7 +594,7 @@ namespace AnyRigConfig
 
         private void Afreet_Clicked()
         {
-            BrowserHelpers.OpenBrowser("http://www.dxatlas.com/omnirig/");
+            BrowserHelpers.OpenBrowser(ConfigCommon.AFREET_URL);
         }
 
         private bool Quit()
@@ -678,20 +604,17 @@ namespace AnyRigConfig
 
         private void Donate_Clicked()
         {
-            BrowserHelpers.OpenBrowser("http://www.iw1qlh.net/donate.php?id=2200");
+            BrowserHelpers.OpenBrowser(ConfigCommon.DONATE_URL);
         }
 
         private void IW1QLH_Clicked()
         {
-            BrowserHelpers.OpenBrowser("http://www.iw1qlh.net");
+            BrowserHelpers.OpenBrowser(ConfigCommon.IW1QLH_URL);
         }
 
         private void HrdlogNet_Clicked()
         {
-            string url = "https://www.ham365.net";
-            if (!string.IsNullOrEmpty(config.HrdUser))
-                url = $"https://www.ham365.net/db/Logbook/{config.HrdUser}";
-            BrowserHelpers.OpenBrowser(url);
+            ConfigCommon.OpenHrdlogNet(config);
         }
 
 
