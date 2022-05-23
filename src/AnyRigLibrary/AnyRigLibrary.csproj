@@ -15,7 +15,7 @@
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
-	  <PackageReference Include="HRDlibrary" Version="1.0.4-beta" />
+	  <PackageReference Include="HRDlibrary" Version="1.0.5-beta" />
     <PackageReference Include="System.Text.Json" Version="6.0.2" />	  
   </ItemGroup>
 
