@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using AnyRigConfigCommon;
 using Terminal.Gui;
 
 namespace AnyRigConfig
@@ -15,9 +16,9 @@ namespace AnyRigConfig
                 as AssemblyInformationalVersionAttribute;
 
             this.Add(new Label(1, 0, assemblyName.Name));
-            this.Add(new Label(1, 1, "AnyRigLibrary"));
-
-            this.Add(new Label(1, 3, $"V {attribute?.InformationalVersion}"));
+            //this.Add(new Label(1, 1, "AnyRigLibrary"));
+            this.Add(new Label(1, 2, $"Ver {attribute?.InformationalVersion}"));
+            this.Add(new Label(1, 3, ConfigCommon.GetServiceVersion()));
             this.Add(new Label(1, 4, $"Copyright 2022-{DateTime.Now.Year} by IW1QLH"));
             this.Add(new Label(1, 5, "Translation by IW1QLH"));
 

@@ -1,0 +1,12 @@
+IMPORTANT: Before commencing using this Product, carefully read the following terms and conditions which have been accepted by your company ("Licensee").
+
+This Product is distributed under license MPL.
+
+This software is provided 'as-is', WITHOUT WARRANTY OF ANY KIND, either express or implied. In no event will the authors be held liable for any damages arising from the use of this software.
+
+Using this program you allow IW1QLH to collect information about how you use the program. This information will be used to improve the quality, reliability and performance of the software.
+
+The author reserves the right to modify or to terminate this agreement at any time, without notice.
+
+Copyright (C) by IW1QLH
+

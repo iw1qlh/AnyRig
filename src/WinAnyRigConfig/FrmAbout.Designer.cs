@@ -38,6 +38,7 @@ namespace WinAnyRigConfig
             this.LblCopyright = new System.Windows.Forms.Label();
             this.LblVersion = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.LblServiceVersion = new System.Windows.Forms.Label();
             this.PictureArs = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureArs)).BeginInit();
@@ -72,8 +73,9 @@ namespace WinAnyRigConfig
             this.tableLayoutPanel1.Controls.Add(this.LblName, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.linkLabel2, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.LblCopyright, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.LblVersion, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.LblVersion, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.LblServiceVersion, 0, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
@@ -119,7 +121,7 @@ namespace WinAnyRigConfig
             // LblVersion
             // 
             this.LblVersion.AutoSize = true;
-            this.LblVersion.Location = new System.Drawing.Point(3, 38);
+            this.LblVersion.Location = new System.Drawing.Point(3, 19);
             this.LblVersion.Name = "LblVersion";
             this.LblVersion.Size = new System.Drawing.Size(22, 13);
             this.LblVersion.TabIndex = 6;
@@ -134,9 +136,19 @@ namespace WinAnyRigConfig
             this.label1.TabIndex = 7;
             this.label1.Text = "Translation by IW1QLH";
             // 
+            // LblServiceVersion
+            // 
+            this.LblServiceVersion.AutoSize = true;
+            this.LblServiceVersion.Location = new System.Drawing.Point(3, 38);
+            this.LblServiceVersion.Name = "LblServiceVersion";
+            this.LblServiceVersion.Size = new System.Drawing.Size(19, 13);
+            this.LblServiceVersion.TabIndex = 8;
+            this.LblServiceVersion.Text = "...";
+            // 
             // PictureArs
             // 
             this.PictureArs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PictureArs.Image = global::WinAnyRigConfig.Properties.Resources.HRDL_icon_256;
             this.PictureArs.Location = new System.Drawing.Point(257, 12);
             this.PictureArs.Name = "PictureArs";
             this.PictureArs.Size = new System.Drawing.Size(125, 116);
@@ -149,6 +161,7 @@ namespace WinAnyRigConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(394, 275);
             this.Controls.Add(this.PictureArs);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -162,6 +175,7 @@ namespace WinAnyRigConfig
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "About";
+            this.Shown += new System.EventHandler(this.FrmAbout_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureArs)).EndInit();
@@ -181,5 +195,6 @@ namespace WinAnyRigConfig
         private System.Windows.Forms.PictureBox PictureArs;
         private System.Windows.Forms.Label LblVersion;
         private Label label1;
+        private Label LblServiceVersion;
     }
 }

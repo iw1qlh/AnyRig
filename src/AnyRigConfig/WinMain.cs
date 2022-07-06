@@ -449,7 +449,7 @@ namespace AnyRigConfig
 
         private void SaveConfig()
         {
-            config.ConfigExePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            config.ConfigExePath = Environment.ProcessPath;
 
             ConfigManager.Save(config);
 

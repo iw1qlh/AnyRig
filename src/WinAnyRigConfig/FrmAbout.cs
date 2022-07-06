@@ -10,8 +10,9 @@ namespace WinAnyRigConfig
         {
 
             InitializeComponent();
+
             LblName.Text = Application.ProductName;
-            LblVersion.Text = Application.ProductVersion;
+            LblVersion.Text = $"Ver {Application.ProductVersion}";            
             LblCopyright.Text = $"Copyright 2022-{DateTime.Now.Year} by IW1QLH";
 
         }
@@ -32,6 +33,11 @@ namespace WinAnyRigConfig
         {
             int n = 0;
             Console.WriteLine(1 / n);
+        }
+
+        private void FrmAbout_Shown(object sender, EventArgs e)
+        {
+            LblServiceVersion.Text = ConfigCommon.GetServiceVersion();
         }
     }
 }

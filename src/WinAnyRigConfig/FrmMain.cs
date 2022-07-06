@@ -24,6 +24,7 @@ namespace WinAnyRigConfig
         public FrmMain()
         {
             InitializeComponent();
+            ConfigCommon.CopyRigsFile();
             LoadData();
         }
 
@@ -131,8 +132,7 @@ namespace WinAnyRigConfig
 
         private void SetViews(string status = null)
         {
-            if (lbRigs.SelectedIndex < 0)
-                lbRigs.SelectedIndex = 0;
+            AnyRigLibrary.Models.RigSettings rig = null;
 
             if (lbRigs.Items.Count == 0)
             {
@@ -141,10 +141,14 @@ namespace WinAnyRigConfig
                 LoadRigSettings(r);
                 adding = true;
             }
+            else
+            {
+                if (lbRigs.SelectedIndex < 0)
+                    lbRigs.SelectedIndex = 0;
 
-            AnyRigLibrary.Models.RigSettings rig = null;
-            if (config.Rigs.Length > lbRigs.SelectedIndex)
-                rig = config.Rigs[lbRigs.SelectedIndex];
+                if (config.Rigs.Length > lbRigs.SelectedIndex)
+                    rig = config.Rigs[lbRigs.SelectedIndex];
+            }
 
             btnNew.Enabled = (!adding && (config.Rigs.Count() < 10));
             btnDelete.Enabled = (!adding && (config.Rigs.Count() > 1) && (rig != null) && (!rig.Enabled || (config.Rigs.Count(w => w.Enabled) > 1)));
@@ -164,7 +168,7 @@ namespace WinAnyRigConfig
 
         private void SaveConfig()
         {
-            config.ConfigExePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            config.ConfigExePath = Environment.ProcessPath;
 
             ConfigManager.Save(config);
 
