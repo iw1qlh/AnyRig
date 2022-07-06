@@ -76,7 +76,7 @@ namespace WinAnyRigConfig
             this.tableLayoutPanel1.Controls.Add(this.LblVersion, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.LblServiceVersion, 0, 2);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 10);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -149,7 +149,7 @@ namespace WinAnyRigConfig
             // 
             this.PictureArs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PictureArs.Image = global::WinAnyRigConfig.Properties.Resources.HRDL_icon_256;
-            this.PictureArs.Location = new System.Drawing.Point(257, 12);
+            this.PictureArs.Location = new System.Drawing.Point(220, 10);
             this.PictureArs.Name = "PictureArs";
             this.PictureArs.Size = new System.Drawing.Size(125, 116);
             this.PictureArs.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -162,7 +162,7 @@ namespace WinAnyRigConfig
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(394, 275);
+            this.ClientSize = new System.Drawing.Size(398, 290);
             this.Controls.Add(this.PictureArs);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.BtnClose);
