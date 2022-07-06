@@ -9,6 +9,7 @@ using AnyRigBase.Helpers;
 using System.ServiceProcess;
 using System.Security.Principal;
 using AnyRigLibrary;
+using System.Management;
 
 namespace AnyRigConfigCommon
 {
@@ -112,6 +113,32 @@ namespace AnyRigConfigCommon
                     SetStatus("You must \"Run as Administrator\" to start/stop services!");
                 }
             }
+        }
+
+        public static string GetServiceVersion()
+        {
+            string result = "Service not found";
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                try
+                {
+                    ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Service");
+                    ManagementObjectCollection collection = searcher.Get();
+                    foreach (ManagementObject obj in collection)
+                    {
+                        if (obj["Name"] as string == "AnyRigService")
+                        {
+                            string exePath = obj["PathName"] as string;
+                            result = "Service Ver " + FileVersionInfo.GetVersionInfo(exePath).ProductVersion;
+                            break;
+                        }
+                    }
+                }
+                catch { }
+            }
+
+            return result;
         }
 
         public static void Revert(ref AnyRigLibrary.Models.AnyRigConfig config, Func<string, string, bool> Confirm, Action<string> SetStatus, Action Reload)

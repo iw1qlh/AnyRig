@@ -50,7 +50,7 @@ namespace AnyRigLibrary
                 UseShellExecute = true,
                 CreateNoWindow = false,
                 WindowStyle = ProcessWindowStyle.Normal,
-                FileName = Path.Combine(config.ConfigExePath, "AnyRigConfig.exe")
+                FileName = config.ConfigExePath
             };
             Process.Start(pInfo);
         }

@@ -10,8 +10,10 @@ namespace WinAnyRigConfig
         {
 
             InitializeComponent();
+
             LblName.Text = Application.ProductName;
-            LblVersion.Text = Application.ProductVersion;
+            LblVersion.Text = $"Ver {Application.ProductVersion}";
+            LblServiceVersion.Text = ConfigCommon.GetServiceVersion();
             LblCopyright.Text = $"Copyright 2022-{DateTime.Now.Year} by IW1QLH";
 
         }

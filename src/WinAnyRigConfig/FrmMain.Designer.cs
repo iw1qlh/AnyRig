@@ -30,6 +30,7 @@ namespace WinAnyRigConfig
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -600,7 +601,7 @@ namespace WinAnyRigConfig
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(792, 375);
+            this.tabPage2.Size = new System.Drawing.Size(624, 375);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Ham365.net";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -619,7 +620,7 @@ namespace WinAnyRigConfig
             this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(786, 369);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(618, 369);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // label13
@@ -651,7 +652,7 @@ namespace WinAnyRigConfig
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(387, 178);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(303, 178);
             this.tableLayoutPanel7.TabIndex = 1;
             // 
             // label14
@@ -660,7 +661,7 @@ namespace WinAnyRigConfig
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label14.Location = new System.Drawing.Point(3, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(187, 27);
+            this.label14.Size = new System.Drawing.Size(145, 27);
             this.label14.TabIndex = 0;
             this.label14.Text = "Ham365 user";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -671,21 +672,21 @@ namespace WinAnyRigConfig
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label15.Location = new System.Drawing.Point(3, 27);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(187, 27);
+            this.label15.Size = new System.Drawing.Size(145, 27);
             this.label15.TabIndex = 1;
             this.label15.Text = "Upload code";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tbHrdUser
             // 
-            this.tbHrdUser.Location = new System.Drawing.Point(196, 3);
+            this.tbHrdUser.Location = new System.Drawing.Point(154, 3);
             this.tbHrdUser.Name = "tbHrdUser";
             this.tbHrdUser.Size = new System.Drawing.Size(100, 21);
             this.tbHrdUser.TabIndex = 2;
             // 
             // tbUploadCode
             // 
-            this.tbUploadCode.Location = new System.Drawing.Point(196, 30);
+            this.tbUploadCode.Location = new System.Drawing.Point(154, 30);
             this.tbUploadCode.Name = "tbUploadCode";
             this.tbUploadCode.PasswordChar = '*';
             this.tbUploadCode.Size = new System.Drawing.Size(100, 21);
@@ -694,7 +695,7 @@ namespace WinAnyRigConfig
             // cbViewCode
             // 
             this.cbViewCode.AutoSize = true;
-            this.cbViewCode.Location = new System.Drawing.Point(196, 57);
+            this.cbViewCode.Location = new System.Drawing.Point(154, 57);
             this.cbViewCode.Name = "cbViewCode";
             this.cbViewCode.Size = new System.Drawing.Size(74, 17);
             this.cbViewCode.TabIndex = 4;
@@ -709,17 +710,17 @@ namespace WinAnyRigConfig
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel8.Controls.Add(this.btnSaveHam365, 1, 0);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(396, 3);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(312, 3);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 2;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(387, 178);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(303, 178);
             this.tableLayoutPanel8.TabIndex = 2;
             // 
             // btnSaveHam365
             // 
-            this.btnSaveHam365.Location = new System.Drawing.Point(309, 3);
+            this.btnSaveHam365.Location = new System.Drawing.Point(225, 3);
             this.btnSaveHam365.Name = "btnSaveHam365";
             this.btnSaveHam365.Size = new System.Drawing.Size(75, 23);
             this.btnSaveHam365.TabIndex = 0;
@@ -733,7 +734,7 @@ namespace WinAnyRigConfig
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(792, 375);
+            this.tabPage3.Size = new System.Drawing.Size(624, 375);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Services";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -772,7 +773,7 @@ namespace WinAnyRigConfig
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(786, 369);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(618, 369);
             this.tableLayoutPanel9.TabIndex = 0;
             // 
             // label16
@@ -781,7 +782,7 @@ namespace WinAnyRigConfig
             this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label16.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label16.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label16.Location = new System.Drawing.Point(241, 0);
+            this.label16.Location = new System.Drawing.Point(157, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(96, 29);
             this.label16.TabIndex = 0;
@@ -792,7 +793,7 @@ namespace WinAnyRigConfig
             // 
             this.cbSocketEnabled.AutoSize = true;
             this.cbSocketEnabled.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbSocketEnabled.Location = new System.Drawing.Point(343, 3);
+            this.cbSocketEnabled.Location = new System.Drawing.Point(259, 3);
             this.cbSocketEnabled.Name = "cbSocketEnabled";
             this.cbSocketEnabled.Size = new System.Drawing.Size(120, 23);
             this.cbSocketEnabled.TabIndex = 4;
@@ -805,7 +806,7 @@ namespace WinAnyRigConfig
             this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label17.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label17.Location = new System.Drawing.Point(241, 76);
+            this.label17.Location = new System.Drawing.Point(157, 76);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(96, 23);
             this.label17.TabIndex = 3;
@@ -816,7 +817,7 @@ namespace WinAnyRigConfig
             // 
             this.cbNetpipeEnabled.AutoSize = true;
             this.cbNetpipeEnabled.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbNetpipeEnabled.Location = new System.Drawing.Point(343, 79);
+            this.cbNetpipeEnabled.Location = new System.Drawing.Point(259, 79);
             this.cbNetpipeEnabled.Name = "cbNetpipeEnabled";
             this.cbNetpipeEnabled.Size = new System.Drawing.Size(120, 17);
             this.cbNetpipeEnabled.TabIndex = 5;
@@ -828,7 +829,7 @@ namespace WinAnyRigConfig
             this.label18.AutoSize = true;
             this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label18.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label18.Location = new System.Drawing.Point(241, 29);
+            this.label18.Location = new System.Drawing.Point(157, 29);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(96, 27);
             this.label18.TabIndex = 7;
@@ -837,7 +838,7 @@ namespace WinAnyRigConfig
             // 
             // nudSocketPort
             // 
-            this.nudSocketPort.Location = new System.Drawing.Point(343, 32);
+            this.nudSocketPort.Location = new System.Drawing.Point(259, 32);
             this.nudSocketPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -863,7 +864,7 @@ namespace WinAnyRigConfig
             this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label19.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label19.Location = new System.Drawing.Point(241, 119);
+            this.label19.Location = new System.Drawing.Point(157, 119);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(96, 23);
             this.label19.TabIndex = 8;
@@ -874,7 +875,7 @@ namespace WinAnyRigConfig
             // 
             this.cbWebSocketEnabled.AutoSize = true;
             this.cbWebSocketEnabled.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbWebSocketEnabled.Location = new System.Drawing.Point(343, 122);
+            this.cbWebSocketEnabled.Location = new System.Drawing.Point(259, 122);
             this.cbWebSocketEnabled.Name = "cbWebSocketEnabled";
             this.cbWebSocketEnabled.Size = new System.Drawing.Size(120, 17);
             this.cbWebSocketEnabled.TabIndex = 9;
@@ -886,7 +887,7 @@ namespace WinAnyRigConfig
             this.label20.AutoSize = true;
             this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label20.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label20.Location = new System.Drawing.Point(241, 142);
+            this.label20.Location = new System.Drawing.Point(157, 142);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(96, 27);
             this.label20.TabIndex = 10;
@@ -895,7 +896,7 @@ namespace WinAnyRigConfig
             // 
             // nudWebSocketPort
             // 
-            this.nudWebSocketPort.Location = new System.Drawing.Point(343, 145);
+            this.nudWebSocketPort.Location = new System.Drawing.Point(259, 145);
             this.nudWebSocketPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -917,7 +918,7 @@ namespace WinAnyRigConfig
             // 
             // btnSaveServices
             // 
-            this.btnSaveServices.Location = new System.Drawing.Point(707, 3);
+            this.btnSaveServices.Location = new System.Drawing.Point(539, 3);
             this.btnSaveServices.Name = "btnSaveServices";
             this.btnSaveServices.Size = new System.Drawing.Size(75, 23);
             this.btnSaveServices.TabIndex = 12;
@@ -928,7 +929,7 @@ namespace WinAnyRigConfig
             // btnRestartService
             // 
             this.btnRestartService.AutoSize = true;
-            this.btnRestartService.Location = new System.Drawing.Point(343, 192);
+            this.btnRestartService.Location = new System.Drawing.Point(259, 192);
             this.btnRestartService.Name = "btnRestartService";
             this.btnRestartService.Size = new System.Drawing.Size(91, 23);
             this.btnRestartService.TabIndex = 13;
@@ -996,57 +997,57 @@ namespace WinAnyRigConfig
             // mnuAbout
             // 
             this.mnuAbout.Name = "mnuAbout";
-            this.mnuAbout.Size = new System.Drawing.Size(154, 22);
+            this.mnuAbout.Size = new System.Drawing.Size(180, 22);
             this.mnuAbout.Text = "About";
             this.mnuAbout.Click += new System.EventHandler(this.mnuAbout_Click);
             // 
             // mnuRigFolder
             // 
             this.mnuRigFolder.Name = "mnuRigFolder";
-            this.mnuRigFolder.Size = new System.Drawing.Size(154, 22);
+            this.mnuRigFolder.Size = new System.Drawing.Size(180, 22);
             this.mnuRigFolder.Text = "Open Rigs folder";
             this.mnuRigFolder.Click += new System.EventHandler(this.mnuRigFolder_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(151, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // mnuIW1QLH
             // 
             this.mnuIW1QLH.Name = "mnuIW1QLH";
-            this.mnuIW1QLH.Size = new System.Drawing.Size(154, 22);
+            this.mnuIW1QLH.Size = new System.Drawing.Size(180, 22);
             this.mnuIW1QLH.Text = "IW1QLH";
             this.mnuIW1QLH.Click += new System.EventHandler(this.mnuIW1QLH_Click);
             // 
             // mnuAfreet
             // 
             this.mnuAfreet.Name = "mnuAfreet";
-            this.mnuAfreet.Size = new System.Drawing.Size(154, 22);
+            this.mnuAfreet.Size = new System.Drawing.Size(180, 22);
             this.mnuAfreet.Text = "Original Omni-rig";
             this.mnuAfreet.Click += new System.EventHandler(this.mnuAfreet_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(151, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // mnuHam365
             // 
             this.mnuHam365.Name = "mnuHam365";
-            this.mnuHam365.Size = new System.Drawing.Size(154, 22);
-            this.mnuHam365.Text = "Ham365.com";
+            this.mnuHam365.Size = new System.Drawing.Size(180, 22);
+            this.mnuHam365.Text = "Ham365.net";
             this.mnuHam365.Click += new System.EventHandler(this.mnuHam365_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(151, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // mnuDonate
             // 
             this.mnuDonate.Name = "mnuDonate";
-            this.mnuDonate.Size = new System.Drawing.Size(154, 22);
+            this.mnuDonate.Size = new System.Drawing.Size(180, 22);
             this.mnuDonate.Text = "Donate";
             this.mnuDonate.Click += new System.EventHandler(this.mnuDonate_Click);
             // 
@@ -1074,6 +1075,7 @@ namespace WinAnyRigConfig
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmMain";
             this.Text = "AnyRig Configuration";
             this.tabControl1.ResumeLayout(false);
